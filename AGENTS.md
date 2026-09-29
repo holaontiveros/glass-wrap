@@ -2,13 +2,17 @@
 
 ## Product focus
 
-This repository is a browser-only generator for print-accurate SVG templates
-that wrap straight and conical glasses. v1 accepts manual millimeter
-measurements, previews the template, and downloads an SVG with an optional
-fixed 10 mm glue tab.
+This repository is a browser-only utilities hub for Nenúfar Regalos
+Personalizados. Each utility lives in `site/<utility-slug>/` and is deployed at
+`/<utility-slug>/`. The first utility is a generator for print-accurate SVG
+templates that wrap straight and conical glasses.
 
 Read `PLAN.md` before proposing or implementing work. Treat its confirmed
 decisions and non-goals as the current product boundary.
+
+Keep root-level `site/index.html` as the concise directory of available
+utilities. Add a new utility only when it has a stable slug, a direct entry in
+that directory, and focused tests beneath `test/<utility-slug>/`.
 
 ## Engineering principles
 

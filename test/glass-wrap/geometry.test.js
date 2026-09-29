@@ -6,7 +6,7 @@ import {
   buildTemplate,
   createSvgMarkup,
   validateMeasurements,
-} from '../dist/geometry.js';
+} from '../../site/glass-wrap/geometry.js';
 
 test('rejects missing, non-finite, zero, and negative measurements', () => {
   for (const measurements of [

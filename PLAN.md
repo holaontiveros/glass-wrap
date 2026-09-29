@@ -1,10 +1,11 @@
-# Glass Wrap SVG Generator — v1 Plan
+# Nenúfar Apps — Glass Wrap v1 Plan
 
 ## Goal
 
-Build a browser-only tool that generates a print-accurate SVG cut outline for
-wrapping a straight or conical glass. A user enters measurements in millimeters,
-reviews a live preview, and downloads the resulting SVG.
+Build a browser-only utilities hub for Nenúfar Regalos Personalizados. Its first
+tool, Glass Wrap, generates a print-accurate SVG cut outline for wrapping a
+straight or conical glass. A user enters measurements in millimeters, reviews a
+live preview, and downloads the resulting SVG.
 
 The first release intentionally has no server, accounts, persistence, printing
 workflow, design editor, material presets, or support for inches.
@@ -28,6 +29,8 @@ workflow, design editor, material presets, or support for inches.
 - v1 is a web app, runs entirely in the browser, and stores no data.
 - The initial platform target is the web browser rather than a native Tauri
   application.
+- The repository root serves a small utility index, and every utility has a
+  stable path below the shared `apps.nenufar.mx` domain.
 
 ## Scope and user flow
 

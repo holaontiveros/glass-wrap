@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Small practical utilities by Nenúfar Regalos Personalizados." />
+    <title>Nenúfar Apps</title>
+    <style>
+      :root { color: #fff5f9; background: #311330; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+      * { box-sizing: border-box; }
+      body { min-width: 320px; min-height: 100vh; margin: 0; display: grid; place-items: center; background: radial-gradient(circle at 80% 0%, #8d3a7e 0, transparent 34rem), #311330; }
+      main { width: min(720px, calc(100% - 2.5rem)); padding: 3rem 0; }
+      .eyebrow { margin: 0 0 .75rem; color: #f8a7bf; font-size: .75rem; font-weight: 800; letter-spacing: .14em; }
+      h1 { margin: 0; font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: -.06em; line-height: .92; }
+      .intro { max-width: 38rem; margin: 1.2rem 0 2rem; color: #f0cad8; font-size: 1.1rem; line-height: 1.6; }
+      .apps { display: grid; gap: 1rem; }
+      a { display: block; padding: 1.35rem; border: 1px solid rgba(241, 116, 158, .35); border-radius: 1rem; background: rgba(73, 27, 72, .84); color: inherit; text-decoration: none; transition: transform .16s ease, background .16s ease; }
+      a:hover, a:focus-visible { transform: translateY(-2px); background: #672c66; outline: 2px solid #f1749e; outline-offset: 3px; }
+      strong, small { display: block; }
+      strong { font-size: 1.2rem; }
+      small { margin-top: .35rem; color: #f0cad8; font-size: .95rem; line-height: 1.45; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">NENÚFAR REGALOS PERSONALIZADOS</p>
+      <h1>Apps</h1>
+      <p class="intro">Small, practical tools for making and personalizing better products.</p>
+      <nav class="apps" aria-label="Available apps">
+        <a href="./glass-wrap/">
+          <strong>Glass Wrap</strong>
+          <small>Create print-accurate SVG templates for straight and conical glasses.</small>
+        </a>
+      </nav>
+    </main>
+  </body>
+</html>
