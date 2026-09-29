@@ -14,6 +14,12 @@ Keep root-level `site/index.html` as the concise directory of available
 utilities. Add a new utility only when it has a stable slug, a direct entry in
 that directory, and focused tests beneath `test/<utility-slug>/`.
 
+Sticker Counter lives in `site/sticker-counter/`. Keep its 480 mm usable vinyl
+width, complete-sticker count, and left-to-right/top-to-bottom grid calculation
+in a browser-independent module. Keep its full-sheet overview capped at 2 m
+for custom lengths while a separate inspection view represents the true sticker
+cell size.
+
 All pages use the shared Nenúfar header in `site/shared/header.js` and
 `site/shared/header.css`. Configure its relative apps-hub and logo paths with
 the header data attributes; use the color logo on this light header and retain

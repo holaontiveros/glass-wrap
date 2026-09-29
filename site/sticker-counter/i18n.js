@@ -1,0 +1,19 @@
+import {resolveLocale} from '../shared/locale.js';
+
+export {resolveLocale};
+
+const translations = {
+  en: {
+    pageTitle: 'Sticker Counter', pageDescription: 'Visualize and count identical stickers on 480 mm vinyl rolls.', language: 'Language', apps: 'Apps', shop: 'Shop', primaryNavigation: 'Primary navigation', eyebrow: 'VINYL LAYOUT CALCULATOR', heading: 'Sticker Counter', intro: 'See exactly how many identical stickers fit on a 480 mm vinyl roll.', setup: 'SETUP', shape: 'Sticker type', circle: 'Circle', square: 'Square', png: 'PNG image', uploadPng: 'Upload PNG', stickerSize: 'Sticker size', manual: 'Manual', sizeCm: 'Size (cm)', restoreOriginal: 'Restore original PNG size', originalSize: 'Original size: {width} × {height} cm', gap: 'Gap (mm)', length: 'Print length', lengthM: 'Length (m)', overview: 'Overview', inspection: 'Inspect sticker', overviewNote: 'The full 480 mm sheet is shown at scale.', cappedOverview: 'Overview shows the first 2 m of this custom length.', count: 'STICKERS THAT FIT', across: 'Across', rows: 'Rows', total: 'Total', usedSpace: 'Used area: {width} mm × {length} mm', noFit: 'This sticker does not fit on the selected vinyl area.', uploadNote: 'PNG transparent padding is included in its size.', choosePng: 'Upload a PNG to preview it in the grid.', quickSize: '{size} cm', quickLength: '{length} m', invalidValue: 'Enter a value greater than zero.', zoomNote: 'A larger view of one sticker cell.',
+  },
+  es: {
+    pageTitle: 'Contador de stickers', pageDescription: 'Visualiza y cuenta stickers idénticos en rollos de vinil de 480 mm.', language: 'Idioma', apps: 'Apps', shop: 'Tienda', primaryNavigation: 'Navegación principal', eyebrow: 'CALCULADORA DE VINIL', heading: 'Contador de stickers', intro: 'Ve exactamente cuántos stickers idénticos caben en un rollo de vinil de 480 mm.', setup: 'CONFIGURACIÓN', shape: 'Tipo de sticker', circle: 'Círculo', square: 'Cuadrado', png: 'Imagen PNG', uploadPng: 'Subir PNG', stickerSize: 'Tamaño del sticker', manual: 'Manual', sizeCm: 'Tamaño (cm)', restoreOriginal: 'Restaurar tamaño original del PNG', originalSize: 'Tamaño original: {width} × {height} cm', gap: 'Separación (mm)', length: 'Largo de impresión', lengthM: 'Largo (m)', overview: 'Vista general', inspection: 'Inspeccionar sticker', overviewNote: 'Se muestra toda la lámina de 480 mm a escala.', cappedOverview: 'La vista general muestra los primeros 2 m de este largo personalizado.', count: 'STICKERS QUE CABEN', across: 'Por fila', rows: 'Filas', total: 'Total', usedSpace: 'Área usada: {width} mm × {length} mm', noFit: 'Este sticker no cabe en el área de vinil seleccionada.', uploadNote: 'El tamaño del PNG incluye el espacio transparente.', choosePng: 'Sube un PNG para verlo en la cuadrícula.', quickSize: '{size} cm', quickLength: '{length} m', invalidValue: 'Ingresa un valor mayor que cero.', zoomNote: 'Una vista más grande de una celda de sticker.',
+  },
+};
+
+export function translate(locale, key, values = {}) {
+  return Object.entries(values).reduce(
+    (text, [name, value]) => text.replace(`{${name}}`, value),
+    translations[resolveLocale(locale)]?.[key] ?? translations.en[key] ?? key,
+  );
+}

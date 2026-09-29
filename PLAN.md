@@ -47,6 +47,22 @@ workflow, design editor, material presets, or support for inches.
 - Every utility and the hub use a shared Nenúfar header with the color logo and
   centered Apps and Shop navigation, plus a language selector, styled
   consistently with the main ecommerce site.
+- Sticker Counter is a browser-only calculator and visualizer for arranging
+  identical stickers on 480 mm-wide vinyl rolls. It does not generate a print
+  or VersaWorks layout file.
+- Sticker Counter supports circles, squares, and uploaded PNGs. A PNG keeps
+  its complete rectangular canvas, including transparent padding; its selected
+  size applies to the longest side while preserving aspect ratio.
+- Sticker size quick options are 3, 4, 5, 6, and 7 cm, with a manual size
+  option. PNGs can restore their embedded physical size, using 300 DPI when no
+  PNG resolution metadata is present.
+- Gap quick options are 3, 4, 5, and 6 mm, with a manual option. The only
+  spacing is between stickers: no outer roll margins are reserved.
+- Print-length quick options are 0.5, 1, 1.5, and 2 m, with a manual option.
+  The overview renders the whole sheet only through 2 m; longer custom sheets
+  show a capped overview and retain a zoomed sticker-inspection mode.
+- The count includes only complete stickers. Items are placed left to right,
+  then top to bottom, as a VersaWorks-style grid.
 
 ## Scope and user flow
 

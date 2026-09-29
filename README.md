@@ -12,6 +12,8 @@ language selector. User-facing content is available in English and Spanish.
 
 - `site/glass-wrap/` → `/glass-wrap/`: print-accurate SVG templates for
   straight and conical glasses.
+- `site/sticker-counter/` → `/sticker-counter/`: a 480 mm vinyl layout
+  visualizer and counter for identical circle, square, or PNG stickers.
 
 ## Use
 
