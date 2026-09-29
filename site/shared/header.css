@@ -1,8 +1,8 @@
 .nenufar-apps-header {
   position: sticky;
-  top: 1.5rem;
+  top: 0;
   z-index: 20;
-  padding-inline: .75rem;
+  padding: 1.5rem .75rem 0;
 }
 
 .nenufar-apps-header__inner {
@@ -100,7 +100,7 @@
 }
 
 @media (max-width: 30rem) {
-  .nenufar-apps-header { top: .75rem; padding-inline: .5rem; }
+  .nenufar-apps-header { padding: .75rem .5rem 0; }
   .nenufar-apps-header__inner { min-height: 3.75rem; padding-inline: 1rem; }
   .nenufar-apps-header__brand img { width: 7.5rem; }
   .nenufar-apps-header__actions { gap: .25rem; }
