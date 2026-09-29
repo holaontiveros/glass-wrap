@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import {calculateGrid} from '../../site/sticker-counter/layout.js';
+import {calculateGrid, gridItemPosition} from '../../site/sticker-counter/layout.js';
 
 test('fills a 480 mm roll left to right and top to bottom with complete stickers only', () => {
   const grid = calculateGrid({itemWidth: 50, itemHeight: 50, gap: 5, length: 1000});
@@ -26,4 +26,11 @@ test('applies the gap only between stickers, never at the vinyl edges', () => {
   assert.equal(grid.usedWidth, 444);
   assert.equal(grid.rows, 15);
   assert.equal(grid.usedLength, 956);
+});
+
+test('positions each sticker from its physical dimensions without stretching it', () => {
+  assert.deepEqual(
+    gridItemPosition({column: 2, row: 3, itemWidth: 50, itemHeight: 50, gap: 4}),
+    {left: 108, top: 162, width: 50, height: 50},
+  );
 });

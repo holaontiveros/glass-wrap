@@ -24,3 +24,12 @@ export function calculateGrid({itemWidth, itemHeight, gap, length}) {
     usedLength: rows ? rows * itemHeight + (rows - 1) * gap : 0,
   };
 }
+
+export function gridItemPosition({column, row, itemWidth, itemHeight, gap}) {
+  return {
+    left: column * (itemWidth + gap),
+    top: row * (itemHeight + gap),
+    width: itemWidth,
+    height: itemHeight,
+  };
+}
