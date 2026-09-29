@@ -5,8 +5,8 @@ Personalizados. Each utility has its own directory under `site/`, which maps
 directly to its public URL path.
 
 `site/shared/` contains the reusable Nenúfar header used by the hub and every
-utility. It shows the color logo and provides a consistent route back to the
-apps directory.
+utility. It shows the color logo, centered Apps and Shop navigation, and a
+language selector. User-facing content is available in English and Spanish.
 
 ## Available utilities
 

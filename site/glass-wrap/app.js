@@ -30,6 +30,9 @@ function renderStaticText() {
   document.querySelectorAll('[data-i18n]').forEach((element) => {
     element.textContent = text(element.dataset.i18n);
   });
+  document.querySelectorAll('[data-i18n-aria]').forEach((element) => {
+    element.setAttribute('aria-label', text(element.dataset.i18nAria));
+  });
   document.querySelectorAll('[data-i18n-placeholder]').forEach((element) => {
     element.placeholder = text(element.dataset.i18nPlaceholder);
   });

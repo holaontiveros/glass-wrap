@@ -19,22 +19,31 @@
       strong, small { display: block; }
       strong { font-size: 1.2rem; }
       small { margin-top: .35rem; color: #f0cad8; font-size: .95rem; line-height: 1.45; }
+      .about { max-width: 42rem; margin-top: 4.5rem; padding-top: 2rem; border-top: 1px solid rgba(241, 116, 158, .35); }
+      .about h2 { margin: 0 0 .8rem; font-size: clamp(1.7rem, 4vw, 2.4rem); letter-spacing: -.04em; }
+      .about p:last-child { margin: 0; color: #f0cad8; font-size: 1.02rem; line-height: 1.65; }
     </style>
     <link rel="stylesheet" href="./shared/header.css" />
   </head>
   <body>
     <div data-nenufar-header data-root-path="./" data-logo-path="./assets/nenufar_logo_horizontal.svg"></div>
     <main>
-      <p class="eyebrow">NENÚFAR REGALOS PERSONALIZADOS</p>
-      <h1>Apps</h1>
-      <p class="intro">Small, practical tools for making and personalizing better products.</p>
-      <nav class="apps" aria-label="Available apps">
+      <p class="eyebrow" data-i18n="eyebrow">NENÚFAR REGALOS PERSONALIZADOS</p>
+      <h1 data-i18n="heading">Apps</h1>
+      <p class="intro" data-i18n="intro">Small, practical tools for making and personalizing better products.</p>
+      <nav class="apps" data-i18n-aria="availableApps" aria-label="Available apps">
         <a href="./glass-wrap/">
           <strong>Glass Wrap</strong>
-          <small>Create print-accurate SVG templates for straight and conical glasses.</small>
+          <small data-i18n="glassWrapDescription">Create print-accurate SVG templates for straight and conical glasses.</small>
         </a>
       </nav>
+      <section class="about" aria-labelledby="about-heading">
+        <p class="eyebrow" data-i18n="aboutEyebrow">ABOUT US</p>
+        <h2 id="about-heading" data-i18n="aboutHeading">Made with care</h2>
+        <p data-i18n="aboutText">We are a small workshop that crafts every product with care and close attention to detail, so each order feels personal and every customer enjoys a thoughtful experience.</p>
+      </section>
     </main>
     <script type="module" src="./shared/header.js"></script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

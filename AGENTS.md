@@ -21,13 +21,14 @@ the white logo for future dark surfaces.
 
 ## Language
 
-- Glass Wrap supports only English (`en`) and Spanish (`es`).
+- Every user-facing page supports only English (`en`) and Spanish (`es`).
 - Resolve the first-render language from the browser locale: `es` and `es-*`
   use Spanish; every other or unavailable locale uses English.
-- Keep all visible strings, validation messages, dynamic states, and document
-  metadata in the utility's translation module. Do not duplicate translated
-  strings in UI logic.
-- A language change is session-only; do not add persistence for it.
+- Keep all visible strings, navigation labels, validation messages, dynamic
+  states, and document metadata in each page's translation module. Do not
+  duplicate translated strings in UI logic.
+- The shared header must always show the language selector. A language change
+  is session-only; do not add persistence for it.
 
 ## Export
 

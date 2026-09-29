@@ -6,6 +6,7 @@
 }
 
 .nenufar-apps-header__inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -39,6 +40,35 @@
   gap: .45rem;
 }
 
+.nenufar-apps-header__nav {
+  position: absolute;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: .2rem;
+  transform: translateX(-50%);
+}
+
+.nenufar-apps-header__nav a {
+  padding: .7rem .95rem;
+  border-radius: 999px;
+  color: #672c66;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background .16s ease, color .16s ease;
+}
+
+.nenufar-apps-header__nav a:hover,
+.nenufar-apps-header__nav a:focus-visible {
+  background: #672c66;
+  color: #fff;
+  outline: none;
+}
+
 .nenufar-apps-header .language-control {
   display: flex;
   align-items: center;
@@ -63,28 +93,8 @@
   padding: .35rem .45rem;
 }
 
-.nenufar-apps-header__hub-link {
-  padding: .7rem .95rem;
-  border-radius: 999px;
-  color: #672c66;
-  font-size: .78rem;
-  font-weight: 800;
-  letter-spacing: .08em;
-  line-height: 1;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: background .16s ease, color .16s ease;
-}
-
-.nenufar-apps-header__hub-link:hover,
-.nenufar-apps-header__hub-link:focus-visible {
-  background: #672c66;
-  color: #fff;
-  outline: none;
-}
-
 .nenufar-apps-header__brand:focus-visible,
-.nenufar-apps-header__hub-link:focus-visible {
+.nenufar-apps-header__nav a:focus-visible {
   outline: 2px solid #f1749e;
   outline-offset: 3px;
 }
@@ -94,7 +104,8 @@
   .nenufar-apps-header__inner { min-height: 3.75rem; padding-inline: 1rem; }
   .nenufar-apps-header__brand img { width: 7.5rem; }
   .nenufar-apps-header__actions { gap: .25rem; }
+  .nenufar-apps-header__nav { gap: 0; }
+  .nenufar-apps-header__nav a { padding-inline: .55rem; font-size: .67rem; }
   .nenufar-apps-header .language-control span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .nenufar-apps-header .language-control select { padding-inline: .3rem; }
-  .nenufar-apps-header__hub-link { padding-inline: .7rem; font-size: .68rem; }
 }

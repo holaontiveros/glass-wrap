@@ -11,6 +11,9 @@ test('renders a brand link to the apps hub with the supplied color logo', () => 
 
   assert.match(markup, /href="\.\.\/"/);
   assert.match(markup, /src="\.\.\/assets\/nenufar_logo_horizontal\.svg"/);
-  assert.match(markup, />Apps</);
+  assert.match(markup, /nenufar-apps-header__nav/);
+  assert.match(markup, /data-i18n="apps"/);
+  assert.match(markup, /href="https:\/\/nenufar\.mx"/);
+  assert.match(markup, /id="language"/);
   assert.match(markup, /nenufar-apps-header__actions/);
 });

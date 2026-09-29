@@ -23,9 +23,10 @@ workflow, design editor, material presets, or support for inches.
   alignment marks.
 - The user can choose whether the preview and downloaded SVG are contour-only
   or filled with Nenúfar pink; contour-only is the default.
-- The utility supports English and Spanish only. It starts in Spanish for an
-  `es` browser locale and English for every other locale; the language can be
-  changed during the current session without saving a preference.
+- The apps hub and every utility support English and Spanish only. They start
+  in Spanish for an `es` browser locale and English for every other locale; the
+  shared-header language selector can change the current page for the session
+  without saving a preference.
 - The user can download the selected template as SVG or as a 300 DPI PNG whose
   dimensions and PNG resolution metadata preserve its physical millimeter size.
 - Measurements can be entered in millimeters or centimeters. Millimeters are
@@ -43,8 +44,8 @@ workflow, design editor, material presets, or support for inches.
 - The repository root serves a small utility index, and every utility has a
   stable path below the shared `apps.nenufar.mx` domain.
 - Every utility and the hub use a shared Nenúfar header with the color logo and
-  a link back to the apps-hub root, styled consistently with the main
-  ecommerce site.
+  centered Apps and Shop navigation, plus a language selector, styled
+  consistently with the main ecommerce site.
 
 ## Scope and user flow
 
