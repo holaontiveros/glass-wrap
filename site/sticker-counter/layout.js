@@ -33,3 +33,16 @@ export function gridItemPosition({column, row, itemWidth, itemHeight, gap}) {
     height: itemHeight,
   };
 }
+
+export function overviewItemPositions({columns, rows, itemWidth, itemHeight, gap, overviewLength}) {
+  const visibleRows = Math.min(rows, Math.floor((overviewLength + gap) / (itemHeight + gap)));
+  const positions = [];
+
+  for (let row = 0; row < visibleRows; row += 1) {
+    for (let column = 0; column < columns; column += 1) {
+      positions.push(gridItemPosition({column, row, itemWidth, itemHeight, gap}));
+    }
+  }
+
+  return positions;
+}

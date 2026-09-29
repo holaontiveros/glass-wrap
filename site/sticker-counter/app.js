@@ -1,4 +1,4 @@
-import {calculateGrid, gridItemPosition, OVERVIEW_MAX_LENGTH_MM, VINYL_WIDTH_MM} from './layout.js';
+import {calculateGrid, overviewItemPositions, OVERVIEW_MAX_LENGTH_MM, VINYL_WIDTH_MM} from './layout.js';
 import {originalPngSizeMm, pngPixelsPerMeter} from './png.js';
 import {resolveLocale, translate} from './i18n.js';
 import {getPreferredLocale, getSessionStorage, savePreferredLocale} from '../shared/locale.js';
@@ -53,7 +53,7 @@ function createSticker(dimensions) {
   return sticker;
 }
 
-function renderPreview(grid, dimensions, length) {
+function renderPreview(grid, dimensions, gap, length) {
   preview.replaceChildren();
   if (!grid.total) {
     preview.textContent = controls.shape.value === 'png' && !png ? text('choosePng') : text('noFit');
@@ -72,23 +72,26 @@ function renderPreview(grid, dimensions, length) {
   }
 
   const overviewLength = Math.min(length, OVERVIEW_MAX_LENGTH_MM);
-  const visibleRows = Math.min(grid.rows, Math.floor((overviewLength + selectedValue(controls.gap, controls.gapValue)) / (dimensions.height + selectedValue(controls.gap, controls.gapValue))));
+  const positions = overviewItemPositions({
+    columns: grid.columns,
+    rows: grid.rows,
+    itemWidth: dimensions.width,
+    itemHeight: dimensions.height,
+    gap,
+    overviewLength,
+  });
   const sheet = document.createElement('div');
   sheet.className = 'overview-sheet';
   sheet.style.setProperty('--sheet-ratio', overviewLength / VINYL_WIDTH_MM);
   sheet.style.setProperty('--overview-length', overviewLength);
-  sheet.style.setProperty('--gap', `${Math.max(1, selectedValue(controls.gap, controls.gapValue) / 5)}px`);
   sheet.style.width = `${Math.min(100, (VINYL_WIDTH_MM / overviewLength) * 100)}%`;
-  for (let row = 0; row < visibleRows; row += 1) {
-    for (let column = 0; column < grid.columns; column += 1) {
-      const position = gridItemPosition({column, row, itemWidth: dimensions.width, itemHeight: dimensions.height, gap});
-      const sticker = createSticker(dimensions);
-      sticker.style.left = `${position.left / VINYL_WIDTH_MM * 100}%`;
-      sticker.style.top = `${position.top / overviewLength * 100}%`;
-      sticker.style.width = `${position.width / VINYL_WIDTH_MM * 100}%`;
-      sticker.style.height = `${position.height / overviewLength * 100}%`;
-      sheet.append(sticker);
-    }
+  for (const position of positions) {
+    const sticker = createSticker(dimensions);
+    sticker.style.left = `${position.left / VINYL_WIDTH_MM * 100}%`;
+    sticker.style.top = `${position.top / overviewLength * 100}%`;
+    sticker.style.width = `${position.width / VINYL_WIDTH_MM * 100}%`;
+    sticker.style.height = `${position.height / overviewLength * 100}%`;
+    sheet.append(sticker);
   }
   preview.append(sheet);
   document.querySelector('#preview-note').textContent = length > OVERVIEW_MAX_LENGTH_MM ? text('cappedOverview') : text('overviewNote');
@@ -107,7 +110,7 @@ function render() {
   document.querySelector('#total').textContent = grid.total;
   document.querySelector('#total-stat').textContent = grid.total;
   document.querySelector('#used-space').textContent = grid.total ? text('usedSpace', {width: grid.usedWidth.toFixed(1), length: grid.usedLength.toFixed(1)}) : '';
-  renderPreview(grid, dimensions, length);
+  renderPreview(grid, dimensions, gap, length);
 }
 
 function toggleManual(select, field) { field.classList.toggle('is-hidden', select.value !== 'manual'); }
