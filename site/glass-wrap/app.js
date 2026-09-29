@@ -1,6 +1,7 @@
 import {buildTemplate, createSvgMarkup, validateMeasurements} from './geometry.js';
 import {createPngBlob} from './export.js';
 import {resolveLocale, translate} from './i18n.js';
+import {getPreferredLocale, getSessionStorage, savePreferredLocale} from '../shared/locale.js';
 import {convertUnits, unitToMillimeters} from './units.js';
 
 const form = document.querySelector('#measurements-form');
@@ -16,7 +17,8 @@ const language = document.querySelector('#language');
 const unit = document.querySelector('#unit');
 
 let currentTemplate = null;
-let locale = resolveLocale(navigator.language);
+const languageStorage = getSessionStorage(window);
+let locale = getPreferredLocale(navigator.language, languageStorage);
 let selectedUnit = 'mm';
 const touchedFields = new Set();
 
@@ -120,6 +122,7 @@ glueTab.addEventListener('change', render);
 filledTemplate.addEventListener('change', render);
 language.addEventListener('change', () => {
   locale = resolveLocale(language.value);
+  savePreferredLocale(locale, languageStorage);
   renderStaticText();
   render();
 });

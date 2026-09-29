@@ -27,8 +27,9 @@ the white logo for future dark surfaces.
 - Keep all visible strings, navigation labels, validation messages, dynamic
   states, and document metadata in each page's translation module. Do not
   duplicate translated strings in UI logic.
-- The shared header must always show the language selector. A language change
-  is session-only; do not add persistence for it.
+- The shared header must always show the language selector. Preserve a language
+  change in browser session storage so it follows navigation between hub and
+  utility pages, but do not persist it beyond the current browser session.
 
 ## Export
 

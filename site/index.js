@@ -1,4 +1,4 @@
-import {resolveLocale} from './shared/locale.js';
+import {getPreferredLocale, getSessionStorage, resolveLocale, savePreferredLocale} from './shared/locale.js';
 
 const translations = {
   en: {
@@ -41,7 +41,8 @@ export function translate(locale, key) {
 
 if (typeof document !== 'undefined') {
   const language = document.querySelector('#language');
-  let locale = resolveLocale(navigator.language);
+  const languageStorage = getSessionStorage(window);
+  let locale = getPreferredLocale(navigator.language, languageStorage);
 
   function render() {
     document.documentElement.lang = locale;
@@ -58,6 +59,7 @@ if (typeof document !== 'undefined') {
   language.value = locale;
   language.addEventListener('change', () => {
     locale = resolveLocale(language.value);
+    savePreferredLocale(locale, languageStorage);
     render();
   });
   render();

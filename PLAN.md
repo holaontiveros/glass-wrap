@@ -25,8 +25,9 @@ workflow, design editor, material presets, or support for inches.
   or filled with Nenúfar pink; contour-only is the default.
 - The apps hub and every utility support English and Spanish only. They start
   in Spanish for an `es` browser locale and English for every other locale; the
-  shared-header language selector can change the current page for the session
-  without saving a preference.
+  shared-header language selector can change the current page and follows
+  navigation during the current browser session without becoming a long-term
+  preference.
 - The user can download the selected template as SVG or as a 300 DPI PNG whose
   dimensions and PNG resolution metadata preserve its physical millimeter size.
 - Measurements can be entered in millimeters or centimeters. Millimeters are
