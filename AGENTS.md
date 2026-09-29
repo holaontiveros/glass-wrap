@@ -31,6 +31,13 @@ that directory, and focused tests beneath `test/<utility-slug>/`.
 - PNG exports use 300 DPI and include pixels-per-meter metadata derived from
   that resolution so physical dimensions remain available to print software.
 
+## Units
+
+- Glass Wrap accepts only millimeters and centimeters; default to millimeters.
+- Normalize displayed measurements to millimeters before validation and geometry
+  calculation. Switching units must convert current entries without changing
+  the physical wrap.
+
 ## Engineering principles
 
 - **YAGNI:** implement only behavior required by the accepted plan. Do not add

@@ -21,6 +21,8 @@ h1 { margin-bottom: .7rem; font-size: clamp(2.7rem, 6vw, 5rem); line-height: .92
 .controls, .preview-panel { border: 1px solid rgba(241, 116, 158, .3); border-radius: 1.25rem; background: rgba(73, 27, 72, .85); box-shadow: 0 1.5rem 4rem rgba(31, 5, 31, .25); }
 .controls { padding: 1.5rem; }
 .section-heading { margin-bottom: 1.6rem; }
+.unit-control { display: flex; gap: .45rem; align-items: center; margin-top: .8rem; color: #efc8d7; font-size: .82rem; font-weight: 600; }
+.unit-control select { border: 1px solid #9e5d91; border-radius: .45rem; background: #351431; color: #fff4f8; padding: .35rem .45rem; }
 .section-heading p:last-child { margin: 0; color: #efc8d7; line-height: 1.45; }
 label { display: block; margin-top: 1.05rem; color: #fff4f8; font-size: .95rem; font-weight: 680; }
 label span { color: #ebc1d0; font-weight: 500; }

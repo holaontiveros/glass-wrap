@@ -28,6 +28,9 @@ workflow, design editor, material presets, or support for inches.
   changed during the current session without saving a preference.
 - The user can download the selected template as SVG or as a 300 DPI PNG whose
   dimensions and PNG resolution metadata preserve its physical millimeter size.
+- Measurements can be entered in millimeters or centimeters. Millimeters are
+  the default, and changing units converts entered values while preserving the
+  underlying physical dimensions.
 - A glue tab is optional and disabled by default, for sticker-paper wraps.
 - When enabled, the glue tab is a fixed 10 mm wide edge extension.
 - The app offers a live preview before export.

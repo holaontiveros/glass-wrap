@@ -21,17 +21,18 @@
           <div class="section-heading">
             <p class="eyebrow" data-i18n="measurements">MEASUREMENTS</p>
             <p data-i18n="measurementsNote">All measurements are in millimeters.</p>
+            <label class="unit-control" for="unit"><span data-i18n="units">Units</span><select id="unit"><option value="mm">mm</option><option value="cm">cm</option></select></label>
           </div>
 
-          <label for="top-diameter"><span data-i18n="topDiameter">Top diameter (mm)</span>
+          <label for="top-diameter"><span data-unit-label="topDiameter">Top diameter (mm)</span>
             <input id="top-diameter" name="topDiameter" inputmode="decimal" type="number" min="0.01" step="any" data-i18n-placeholder="example80" placeholder="e.g. 80" required />
             <small id="top-diameter-error" class="field-error"></small>
           </label>
-          <label for="bottom-diameter"><span data-i18n="bottomDiameter">Bottom diameter (mm)</span>
+          <label for="bottom-diameter"><span data-unit-label="bottomDiameter">Bottom diameter (mm)</span>
             <input id="bottom-diameter" name="bottomDiameter" inputmode="decimal" type="number" min="0.01" step="any" data-i18n-placeholder="example70" placeholder="e.g. 70" required />
             <small id="bottom-diameter-error" class="field-error"></small>
           </label>
-          <label for="glass-height"><span data-i18n="height">Glass height (mm)</span>
+          <label for="glass-height"><span data-unit-label="height">Glass height (mm)</span>
             <input id="glass-height" name="height" inputmode="decimal" type="number" min="0.01" step="any" data-i18n-placeholder="example120" placeholder="e.g. 120" required />
             <small id="glass-height-error" class="field-error"></small>
           </label>
@@ -60,6 +61,6 @@
         </section>
       </section>
     </main>
-    <script type="module" src="./app.js"></script>
+    <script type="module" src="./app.js?v=units-1"></script>
   </body>
 </html>

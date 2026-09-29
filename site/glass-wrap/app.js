@@ -1,6 +1,7 @@
 import {buildTemplate, createSvgMarkup, validateMeasurements} from './geometry.js';
 import {createPngBlob} from './export.js';
 import {resolveLocale, translate} from './i18n.js';
+import {convertUnits, unitToMillimeters} from './units.js';
 
 const form = document.querySelector('#measurements-form');
 const preview = document.querySelector('#preview');
@@ -12,12 +13,15 @@ const inputs = [...form.querySelectorAll('input[type="number"]')];
 const glueTab = document.querySelector('#glue-tab');
 const filledTemplate = document.querySelector('#filled-template');
 const language = document.querySelector('#language');
+const unit = document.querySelector('#unit');
 
 let currentTemplate = null;
 let locale = resolveLocale(navigator.language);
+let selectedUnit = 'mm';
 const touchedFields = new Set();
 
 const text = (key) => translate(locale, key);
+const textWithUnit = (key) => text(key).replace('{unit}', selectedUnit);
 
 function renderStaticText() {
   document.documentElement.lang = locale;
@@ -29,15 +33,18 @@ function renderStaticText() {
   document.querySelectorAll('[data-i18n-placeholder]').forEach((element) => {
     element.placeholder = text(element.dataset.i18nPlaceholder);
   });
+  document.querySelectorAll('[data-unit-label]').forEach((element) => {
+    element.textContent = `${text(element.dataset.unitLabel)} (${selectedUnit})`;
+  });
 }
 
 function getMeasurements() {
-  return Object.fromEntries(inputs.map((input) => [input.name, Number(input.value)]));
+  return Object.fromEntries(inputs.map((input) => [input.name, unitToMillimeters(Number(input.value), selectedUnit)]));
 }
 
 function showErrors(errors) {
   for (const input of inputs) {
-    const message = touchedFields.has(input.name) && errors[input.name] ? text(`${input.name}Error`) : '';
+    const message = touchedFields.has(input.name) && errors[input.name] ? textWithUnit(`${input.name}Error`) : '';
     const errorElement = document.querySelector(`#${input.id}-error`);
     errorElement.textContent = message;
     input.setAttribute('aria-invalid', String(Boolean(message)));
@@ -113,8 +120,18 @@ language.addEventListener('change', () => {
   renderStaticText();
   render();
 });
+unit.addEventListener('change', () => {
+  const nextUnit = unit.value;
+  inputs.forEach((input) => {
+    if (input.value !== '') input.value = String(convertUnits(Number(input.value), selectedUnit, nextUnit));
+  });
+  selectedUnit = nextUnit;
+  renderStaticText();
+  render();
+});
 downloadButton.addEventListener('click', downloadSvg);
 downloadPngButton.addEventListener('click', downloadPng);
 language.value = locale;
+unit.value = selectedUnit;
 renderStaticText();
 render();
