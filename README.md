@@ -22,3 +22,10 @@ npm test
 
 The tests cover validation, straight and conical geometry, near-equal diameter
 handling, the 10 mm tab, and SVG export dimensions.
+
+## GitHub Pages
+
+The site is deployed from `dist/` by the GitHub Actions workflow in
+`.github/workflows/deploy-pages.yml`. In the repository’s **Settings → Pages**,
+select **GitHub Actions** as the publishing source once. Future pushes to
+`main` publish the current version automatically.
