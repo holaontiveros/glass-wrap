@@ -144,5 +144,7 @@ export function createSvgMarkup(template, options = {}) {
   const filled = options.filled === true;
   const fill = filled ? '#f1749e' : 'none';
   const stroke = filled ? '#672c66' : '#000';
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${format(template.width)}mm" height="${format(template.height)}mm" viewBox="${template.viewBox}"><path d="${template.svgPath}" fill="${fill}" stroke="${stroke}" stroke-width="0.25"/></svg>`;
+  const originalWidth = format(template.width);
+  const originalHeight = format(template.height);
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${originalHeight}mm" height="${originalWidth}mm" viewBox="0 0 ${originalHeight} ${originalWidth}"><g transform="translate(0 ${originalWidth}) rotate(-90)"><path d="${template.svgPath}" fill="${fill}" stroke="${stroke}" stroke-width="0.25"/></g></svg>`;
 }

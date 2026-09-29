@@ -31,6 +31,9 @@ workflow, design editor, material presets, or support for inches.
 - Measurements can be entered in millimeters or centimeters. Millimeters are
   the default, and changing units converts entered values while preserving the
   underlying physical dimensions.
+- Preview and exported artwork are rotated 90° into the intended orientation;
+  this swaps SVG/PNG page width and height without changing the cut shape's
+  physical dimensions.
 - A glue tab is optional and disabled by default, for sticker-paper wraps.
 - When enabled, the glue tab is a fixed 10 mm wide edge extension.
 - The app offers a live preview before export.

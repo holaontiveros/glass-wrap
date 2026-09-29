@@ -30,6 +30,9 @@ that directory, and focused tests beneath `test/<utility-slug>/`.
   contour/fill appearance.
 - PNG exports use 300 DPI and include pixels-per-meter metadata derived from
   that resolution so physical dimensions remain available to print software.
+- Keep the displayed and exported artwork in the intended rotated orientation.
+  When rotating the SVG canvas, swap width and height while preserving the
+  template geometry and physical size.
 
 ## Units
 

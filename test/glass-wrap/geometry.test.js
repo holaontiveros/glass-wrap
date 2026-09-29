@@ -57,13 +57,15 @@ test('uses stable straight geometry for practically equal diameters', () => {
   assert.equal(template.kind, 'straight');
 });
 
-test('exports a millimeter SVG whose viewBox matches its geometry', () => {
+test('exports a rotated millimeter SVG without changing the template size', () => {
   const template = buildTemplate({topDiameter: 80, bottomDiameter: 80, height: 120});
   const svg = createSvgMarkup(template);
+  const originalWidth = Number(template.width.toFixed(5));
 
-  assert.match(svg, /width="[\d.]+mm"/);
-  assert.match(svg, /height="[\d.]+mm"/);
-  assert.match(svg, new RegExp(`viewBox="${template.viewBox}"`));
+  assert.match(svg, new RegExp(`width="${template.height}mm"`));
+  assert.match(svg, new RegExp(`height="${originalWidth}mm"`));
+  assert.match(svg, new RegExp(`viewBox="0 0 ${template.height} ${originalWidth}"`));
+  assert.match(svg, new RegExp(`transform="translate\\(0 ${originalWidth}\\) rotate\\(-90\\)"`));
   assert.match(svg, /<path d="M /);
 });
 
