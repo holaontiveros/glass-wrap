@@ -1,4 +1,5 @@
 import {buildTemplate, createSvgMarkup, validateMeasurements} from './geometry.js';
+import {resolveLocale, translate} from './i18n.js';
 
 const form = document.querySelector('#measurements-form');
 const preview = document.querySelector('#preview');
@@ -8,9 +9,25 @@ const shapeNote = document.querySelector('#shape-note');
 const inputs = [...form.querySelectorAll('input[type="number"]')];
 const glueTab = document.querySelector('#glue-tab');
 const filledTemplate = document.querySelector('#filled-template');
+const language = document.querySelector('#language');
 
 let currentTemplate = null;
+let locale = resolveLocale(navigator.language);
 const touchedFields = new Set();
+
+const text = (key) => translate(locale, key);
+
+function renderStaticText() {
+  document.documentElement.lang = locale;
+  document.title = text('pageTitle');
+  document.querySelector('#page-description').content = text('pageDescription');
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    element.textContent = text(element.dataset.i18n);
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((element) => {
+    element.placeholder = text(element.dataset.i18nPlaceholder);
+  });
+}
 
 function getMeasurements() {
   return Object.fromEntries(inputs.map((input) => [input.name, Number(input.value)]));
@@ -18,7 +35,7 @@ function getMeasurements() {
 
 function showErrors(errors) {
   for (const input of inputs) {
-    const message = touchedFields.has(input.name) ? errors[input.name] || '' : '';
+    const message = touchedFields.has(input.name) && errors[input.name] ? text(`${input.name}Error`) : '';
     const errorElement = document.querySelector(`#${input.id}-error`);
     errorElement.textContent = message;
     input.setAttribute('aria-invalid', String(Boolean(message)));
@@ -32,10 +49,10 @@ function render() {
 
   if (!validation.valid) {
     currentTemplate = null;
-    preview.innerHTML = '<p>Enter all three measurements to see the template.</p>';
+    preview.innerHTML = `<p>${text('waitingNote')}</p>`;
     downloadButton.disabled = true;
-    shapeBadge.textContent = 'Waiting for dimensions';
-    shapeNote.textContent = 'Matching diameters create a straight wrap.';
+    shapeBadge.textContent = text('waiting');
+    shapeNote.textContent = text('matchingDiameters');
     return;
   }
 
@@ -43,10 +60,8 @@ function render() {
   preview.innerHTML = createSvgMarkup(currentTemplate, {filled: filledTemplate.checked});
   downloadButton.disabled = false;
   const isStraight = currentTemplate.kind === 'straight';
-  shapeBadge.textContent = isStraight ? 'Straight glass' : 'Conical glass';
-  shapeNote.textContent = isStraight
-    ? 'Matching diameters: this template is a rectangle.'
-    : 'Different diameters: this template follows the glass taper.';
+  shapeBadge.textContent = isStraight ? text('straightGlass') : text('conicalGlass');
+  shapeNote.textContent = isStraight ? text('straightNote') : text('conicalNote');
 }
 
 function downloadSvg() {
@@ -67,5 +82,12 @@ form.addEventListener('input', (event) => {
 });
 glueTab.addEventListener('change', render);
 filledTemplate.addEventListener('change', render);
+language.addEventListener('change', () => {
+  locale = resolveLocale(language.value);
+  renderStaticText();
+  render();
+});
 downloadButton.addEventListener('click', downloadSvg);
+language.value = locale;
+renderStaticText();
 render();

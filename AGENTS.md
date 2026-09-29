@@ -14,6 +14,16 @@ Keep root-level `site/index.html` as the concise directory of available
 utilities. Add a new utility only when it has a stable slug, a direct entry in
 that directory, and focused tests beneath `test/<utility-slug>/`.
 
+## Language
+
+- Glass Wrap supports only English (`en`) and Spanish (`es`).
+- Resolve the first-render language from the browser locale: `es` and `es-*`
+  use Spanish; every other or unavailable locale uses English.
+- Keep all visible strings, validation messages, dynamic states, and document
+  metadata in the utility's translation module. Do not duplicate translated
+  strings in UI logic.
+- A language change is session-only; do not add persistence for it.
+
 ## Engineering principles
 
 - **YAGNI:** implement only behavior required by the accepted plan. Do not add

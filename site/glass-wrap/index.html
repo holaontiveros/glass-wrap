@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Create print-accurate SVG wrap templates for straight and conical glasses." />
+    <meta id="page-description" name="description" content="Create print-accurate SVG wrap templates for straight and conical glasses." />
     <title>Glass Wrap</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%2317b6d3' d='M8 4h16l-2 24H10z'/%3E%3Cpath fill='none' stroke='%230b1728' stroke-width='2' d='M10 7h12M11 22h10'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="./styles.css" />
@@ -11,52 +11,52 @@
   <body>
     <main class="app-shell">
       <section class="intro" aria-labelledby="page-title">
-        <p class="eyebrow">SVG TEMPLATE TOOL</p>
-        <h1 id="page-title">Glass Wrap</h1>
-        <p>Enter the outside dimensions of your glass. Download a cut outline that prints at actual size.</p>
+        <div class="intro-topline"><p class="eyebrow" data-i18n="eyebrow">SVG TEMPLATE TOOL</p><label class="language-control" for="language"><span data-i18n="language">Language</span><select id="language"><option value="en">English</option><option value="es">Español</option></select></label></div>
+        <h1 id="page-title" data-i18n="heading">Glass Wrap</h1>
+        <p data-i18n="intro">Enter the outside dimensions of your glass. Download a cut outline that prints at actual size.</p>
       </section>
 
       <section class="workspace" aria-label="Glass wrap generator">
         <form id="measurements-form" class="controls" novalidate>
           <div class="section-heading">
-            <p class="eyebrow">MEASUREMENTS</p>
-            <p>All measurements are in millimeters.</p>
+            <p class="eyebrow" data-i18n="measurements">MEASUREMENTS</p>
+            <p data-i18n="measurementsNote">All measurements are in millimeters.</p>
           </div>
 
-          <label for="top-diameter">Top diameter <span>(mm)</span>
-            <input id="top-diameter" name="topDiameter" inputmode="decimal" type="number" min="0.01" step="any" placeholder="e.g. 80" required />
+          <label for="top-diameter"><span data-i18n="topDiameter">Top diameter (mm)</span>
+            <input id="top-diameter" name="topDiameter" inputmode="decimal" type="number" min="0.01" step="any" data-i18n-placeholder="example80" placeholder="e.g. 80" required />
             <small id="top-diameter-error" class="field-error"></small>
           </label>
-          <label for="bottom-diameter">Bottom diameter <span>(mm)</span>
-            <input id="bottom-diameter" name="bottomDiameter" inputmode="decimal" type="number" min="0.01" step="any" placeholder="e.g. 70" required />
+          <label for="bottom-diameter"><span data-i18n="bottomDiameter">Bottom diameter (mm)</span>
+            <input id="bottom-diameter" name="bottomDiameter" inputmode="decimal" type="number" min="0.01" step="any" data-i18n-placeholder="example70" placeholder="e.g. 70" required />
             <small id="bottom-diameter-error" class="field-error"></small>
           </label>
-          <label for="glass-height">Glass height <span>(mm)</span>
-            <input id="glass-height" name="height" inputmode="decimal" type="number" min="0.01" step="any" placeholder="e.g. 120" required />
+          <label for="glass-height"><span data-i18n="height">Glass height (mm)</span>
+            <input id="glass-height" name="height" inputmode="decimal" type="number" min="0.01" step="any" data-i18n-placeholder="example120" placeholder="e.g. 120" required />
             <small id="glass-height-error" class="field-error"></small>
           </label>
 
-          <p id="shape-note" class="shape-note" aria-live="polite">Matching diameters create a straight wrap.</p>
+          <p id="shape-note" class="shape-note" aria-live="polite" data-i18n="matchingDiameters">Matching diameters create a straight wrap.</p>
           <label class="tab-option" for="glue-tab">
             <input id="glue-tab" name="glueTab" type="checkbox" />
-            <span><strong>Add 10 mm glue tab</strong><small>Use for wraps that will be glued rather than printed on sticker paper.</small></span>
+            <span><strong data-i18n="addGlueTab">Add 10 mm glue tab</strong><small data-i18n="glueTabNote">Use for wraps that will be glued rather than printed on sticker paper.</small></span>
           </label>
           <label class="tab-option" for="filled-template">
             <input id="filled-template" name="filledTemplate" type="checkbox" />
-            <span><strong>Fill template with Nenúfar pink</strong><small>Off keeps the preview and SVG as a contour only.</small></span>
+            <span><strong data-i18n="fillTemplate">Fill template with Nenúfar pink</strong><small data-i18n="fillTemplateNote">Off keeps the preview and SVG as a contour only.</small></span>
           </label>
-          <button id="download" type="button" disabled>Download SVG</button>
+          <button id="download" type="button" disabled data-i18n="downloadSvg">Download SVG</button>
         </form>
 
         <section class="preview-panel" aria-labelledby="preview-title">
           <div class="preview-heading">
-            <div><p class="eyebrow">LIVE PREVIEW</p><h2 id="preview-title">Your cut outline</h2></div>
-            <span id="shape-badge" class="shape-badge">Waiting for dimensions</span>
+            <div><p class="eyebrow" data-i18n="livePreview">LIVE PREVIEW</p><h2 id="preview-title" data-i18n="cutOutline">Your cut outline</h2></div>
+            <span id="shape-badge" class="shape-badge" data-i18n="waiting">Waiting for dimensions</span>
           </div>
           <div id="preview" class="preview" aria-live="polite">
-            <p>Enter all three measurements to see the template.</p>
+            <p data-i18n="waitingNote">Enter all three measurements to see the template.</p>
           </div>
-          <p class="preview-note">The outline is shown to fit this panel. The downloaded SVG retains its real millimeter dimensions.</p>
+          <p class="preview-note" data-i18n="previewNote">The outline is shown to fit this panel. The downloaded SVG retains its real millimeter dimensions.</p>
         </section>
       </section>
     </main>

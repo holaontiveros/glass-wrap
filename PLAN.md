@@ -23,6 +23,9 @@ workflow, design editor, material presets, or support for inches.
   alignment marks.
 - The user can choose whether the preview and downloaded SVG are contour-only
   or filled with Nenúfar pink; contour-only is the default.
+- The utility supports English and Spanish only. It starts in Spanish for an
+  `es` browser locale and English for every other locale; the language can be
+  changed during the current session without saving a preference.
 - A glue tab is optional and disabled by default, for sticker-paper wraps.
 - When enabled, the glue tab is a fixed 10 mm wide edge extension.
 - The app offers a live preview before export.
