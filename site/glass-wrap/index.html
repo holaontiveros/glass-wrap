@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div data-nenufar-header data-root-path="../" data-logo-path="../assets/nenufar_logo_horizontal.svg"></div>
+    <div data-nenufar-header data-root-path="../" data-logo-path="../assets/nenufar_logo_horizontal.svg">
+      <label class="language-control" data-nenufar-header-control for="language"><span data-i18n="language">Language</span><select id="language"><option value="en">English</option><option value="es">Español</option></select></label>
+    </div>
     <main class="app-shell">
       <section class="intro" aria-labelledby="page-title">
-        <div class="intro-topline"><p class="eyebrow" data-i18n="eyebrow">SVG TEMPLATE TOOL</p><label class="language-control" for="language"><span data-i18n="language">Language</span><select id="language"><option value="en">English</option><option value="es">Español</option></select></label></div>
+        <p class="eyebrow" data-i18n="eyebrow">SVG TEMPLATE TOOL</p>
         <h1 id="page-title" data-i18n="heading">Glass Wrap</h1>
         <p data-i18n="intro">Enter the outside dimensions of your glass. Download a cut outline that prints at actual size.</p>
       </section>

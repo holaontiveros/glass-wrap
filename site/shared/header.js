@@ -5,7 +5,9 @@ export function headerMarkup({rootPath, logoPath}) {
         <a class="nenufar-apps-header__brand" href="${rootPath}" aria-label="Nenúfar Apps home">
           <img src="${logoPath}" alt="Nenúfar Regalos Personalizados" />
         </a>
-        <a class="nenufar-apps-header__hub-link" href="${rootPath}">Apps</a>
+        <div class="nenufar-apps-header__actions">
+          <a class="nenufar-apps-header__hub-link" href="${rootPath}">Apps</a>
+        </div>
       </div>
     </header>
   `;
@@ -13,9 +15,13 @@ export function headerMarkup({rootPath, logoPath}) {
 
 if (typeof document !== 'undefined') {
   document.querySelectorAll('[data-nenufar-header]').forEach((element) => {
+    const controls = [...element.querySelectorAll('[data-nenufar-header-control]')];
+
     element.innerHTML = headerMarkup({
       rootPath: element.dataset.rootPath ?? './',
       logoPath: element.dataset.logoPath ?? './assets/nenufar_logo_horizontal.svg',
     });
+
+    element.querySelector('.nenufar-apps-header__actions').prepend(...controls);
   });
 }

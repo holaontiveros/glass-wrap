@@ -1,6 +1,6 @@
 .nenufar-apps-header {
   position: sticky;
-  top: .75rem;
+  top: 1.5rem;
   z-index: 20;
   padding-inline: .75rem;
 }
@@ -33,6 +33,36 @@
   height: auto;
 }
 
+.nenufar-apps-header__actions {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+}
+
+.nenufar-apps-header .language-control {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  margin: 0;
+  color: #672c66;
+  font-size: .78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.nenufar-apps-header .language-control span {
+  color: inherit;
+  font-weight: inherit;
+}
+
+.nenufar-apps-header .language-control select {
+  border: 1px solid #d8b0d2;
+  border-radius: .45rem;
+  background: rgba(255, 255, 255, .9);
+  color: #672c66;
+  padding: .35rem .45rem;
+}
+
 .nenufar-apps-header__hub-link {
   padding: .7rem .95rem;
   border-radius: 999px;
@@ -60,8 +90,11 @@
 }
 
 @media (max-width: 30rem) {
-  .nenufar-apps-header { top: .5rem; padding-inline: .5rem; }
+  .nenufar-apps-header { top: .75rem; padding-inline: .5rem; }
   .nenufar-apps-header__inner { min-height: 3.75rem; padding-inline: 1rem; }
   .nenufar-apps-header__brand img { width: 7.5rem; }
+  .nenufar-apps-header__actions { gap: .25rem; }
+  .nenufar-apps-header .language-control span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .nenufar-apps-header .language-control select { padding-inline: .3rem; }
   .nenufar-apps-header__hub-link { padding-inline: .7rem; font-size: .68rem; }
 }
