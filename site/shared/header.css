@@ -1,0 +1,67 @@
+.nenufar-apps-header {
+  position: sticky;
+  top: .75rem;
+  z-index: 20;
+  padding-inline: .75rem;
+}
+
+.nenufar-apps-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(72rem, 100%);
+  min-height: 4.25rem;
+  margin: 0 auto;
+  padding: .65rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, .9);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .74);
+  box-shadow: 0 10px 35px rgba(92, 25, 60, .12);
+  backdrop-filter: blur(18px);
+}
+
+.nenufar-apps-header__brand {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.nenufar-apps-header__brand img {
+  display: block;
+  width: 9.35rem;
+  height: auto;
+}
+
+.nenufar-apps-header__hub-link {
+  padding: .7rem .95rem;
+  border-radius: 999px;
+  color: #672c66;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background .16s ease, color .16s ease;
+}
+
+.nenufar-apps-header__hub-link:hover,
+.nenufar-apps-header__hub-link:focus-visible {
+  background: #672c66;
+  color: #fff;
+  outline: none;
+}
+
+.nenufar-apps-header__brand:focus-visible,
+.nenufar-apps-header__hub-link:focus-visible {
+  outline: 2px solid #f1749e;
+  outline-offset: 3px;
+}
+
+@media (max-width: 30rem) {
+  .nenufar-apps-header { top: .5rem; padding-inline: .5rem; }
+  .nenufar-apps-header__inner { min-height: 3.75rem; padding-inline: 1rem; }
+  .nenufar-apps-header__brand img { width: 7.5rem; }
+  .nenufar-apps-header__hub-link { padding-inline: .7rem; font-size: .68rem; }
+}

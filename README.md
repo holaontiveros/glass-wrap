@@ -4,6 +4,10 @@ This repository hosts small browser-based utilities by Nenúfar Regalos
 Personalizados. Each utility has its own directory under `site/`, which maps
 directly to its public URL path.
 
+`site/shared/` contains the reusable Nenúfar header used by the hub and every
+utility. It shows the color logo and provides a consistent route back to the
+apps directory.
+
 ## Available utilities
 
 - `site/glass-wrap/` → `/glass-wrap/`: print-accurate SVG templates for

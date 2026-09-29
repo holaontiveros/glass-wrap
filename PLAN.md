@@ -42,6 +42,9 @@ workflow, design editor, material presets, or support for inches.
   application.
 - The repository root serves a small utility index, and every utility has a
   stable path below the shared `apps.nenufar.mx` domain.
+- Every utility and the hub use a shared Nenúfar header with the color logo and
+  a link back to the apps-hub root, styled consistently with the main
+  ecommerce site.
 
 ## Scope and user flow
 

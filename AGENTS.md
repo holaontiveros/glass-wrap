@@ -14,6 +14,11 @@ Keep root-level `site/index.html` as the concise directory of available
 utilities. Add a new utility only when it has a stable slug, a direct entry in
 that directory, and focused tests beneath `test/<utility-slug>/`.
 
+All pages use the shared Nenúfar header in `site/shared/header.js` and
+`site/shared/header.css`. Configure its relative apps-hub and logo paths with
+the header data attributes; use the color logo on this light header and retain
+the white logo for future dark surfaces.
+
 ## Language
 
 - Glass Wrap supports only English (`en`) and Spanish (`es`).
