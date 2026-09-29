@@ -57,8 +57,10 @@ workflow, design editor, material presets, or support for inches.
   option. PNGs can restore their embedded physical size, using 300 DPI when no
   PNG resolution metadata is present.
 - Gap quick options are 3, 4, 5, and 6 mm, with a manual option. The only
-  spacing is between stickers: no outer roll margins are reserved.
+  spacing is between stickers: no outer roll margins are reserved. The default
+  is 4 mm.
 - Print-length quick options are 0.5, 1, 1.5, and 2 m, with a manual option.
+  The default is 1 m.
   The overview renders the whole sheet only through 2 m; longer custom sheets
   show a capped overview and retain a zoomed sticker-inspection mode.
 - The count includes only complete stickers. Items are placed left to right,

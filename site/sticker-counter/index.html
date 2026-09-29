@@ -28,12 +28,13 @@
           <button id="restore-original" class="secondary is-hidden" type="button" data-i18n="restoreOriginal">Restore original PNG size</button>
           <p id="original-size" class="field-note is-hidden"></p>
 
-          <label for="gap"><span data-i18n="gap">Gap (mm)</span><select id="gap"><option value="3">3 mm</option><option value="4">4 mm</option><option value="5" selected>5 mm</option><option value="6">6 mm</option><option value="manual" data-i18n="manual">Manual</option></select></label>
+          <label for="gap"><span data-i18n="gap">Gap (mm)</span><select id="gap"><option value="3">3 mm</option><option value="4" selected>4 mm</option><option value="5">5 mm</option><option value="6">6 mm</option><option value="manual" data-i18n="manual">Manual</option></select></label>
           <label id="manual-gap" class="is-hidden" for="gap-value"><span data-i18n="gap">Gap (mm)</span><input id="gap-value" type="number" min="0" step="any" inputmode="decimal" /></label>
 
-          <label for="length"><span data-i18n="length">Print length</span><select id="length"><option value="0.5">0.5 m</option><option value="1">1 m</option><option value="1.5">1.5 m</option><option value="2" selected>2 m</option><option value="manual" data-i18n="manual">Manual</option></select></label>
+          <label for="length"><span data-i18n="length">Print length</span><select id="length"><option value="0.5">0.5 m</option><option value="1" selected>1 m</option><option value="1.5">1.5 m</option><option value="2">2 m</option><option value="manual" data-i18n="manual">Manual</option></select></label>
           <label id="manual-length" class="is-hidden" for="length-value"><span data-i18n="lengthM">Length (m)</span><input id="length-value" type="number" min="0.01" step="any" inputmode="decimal" /></label>
           <small id="form-error" class="field-error" aria-live="polite"></small>
+          <aside class="ordering-help"><p data-i18n="orderingHelp">Use this tool to estimate how many identical stickers fit before ordering them from us.</p><a href="https://nenufar.mx" data-i18n="orderStickers">Order printed stickers</a></aside>
         </form>
 
         <section class="results" aria-labelledby="preview-title">

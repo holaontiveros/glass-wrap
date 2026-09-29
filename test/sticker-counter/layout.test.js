@@ -18,3 +18,12 @@ test('does not count a sticker that exceeds the usable roll dimension', () => {
 
   assert.deepEqual(grid, {columns: 0, rows: 0, total: 0, usedWidth: 0, usedLength: 0});
 });
+
+test('applies the gap only between stickers, never at the vinyl edges', () => {
+  const grid = calculateGrid({itemWidth: 60, itemHeight: 60, gap: 4, length: 1000});
+
+  assert.equal(grid.columns, 7);
+  assert.equal(grid.usedWidth, 444);
+  assert.equal(grid.rows, 15);
+  assert.equal(grid.usedLength, 956);
+});
