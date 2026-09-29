@@ -26,6 +26,8 @@ workflow, design editor, material presets, or support for inches.
 - The utility supports English and Spanish only. It starts in Spanish for an
   `es` browser locale and English for every other locale; the language can be
   changed during the current session without saving a preference.
+- The user can download the selected template as SVG or as a 300 DPI PNG whose
+  dimensions and PNG resolution metadata preserve its physical millimeter size.
 - A glue tab is optional and disabled by default, for sticker-paper wraps.
 - When enabled, the glue tab is a fixed 10 mm wide edge extension.
 - The app offers a live preview before export.

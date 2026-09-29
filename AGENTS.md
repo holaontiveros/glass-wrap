@@ -24,6 +24,13 @@ that directory, and focused tests beneath `test/<utility-slug>/`.
   strings in UI logic.
 - A language change is session-only; do not add persistence for it.
 
+## Export
+
+- SVG and PNG exports must use the same template geometry and selected
+  contour/fill appearance.
+- PNG exports use 300 DPI and include pixels-per-meter metadata derived from
+  that resolution so physical dimensions remain available to print software.
+
 ## Engineering principles
 
 - **YAGNI:** implement only behavior required by the accepted plan. Do not add

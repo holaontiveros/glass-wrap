@@ -1,9 +1,11 @@
 import {buildTemplate, createSvgMarkup, validateMeasurements} from './geometry.js';
+import {createPngBlob} from './export.js';
 import {resolveLocale, translate} from './i18n.js';
 
 const form = document.querySelector('#measurements-form');
 const preview = document.querySelector('#preview');
 const downloadButton = document.querySelector('#download');
+const downloadPngButton = document.querySelector('#download-png');
 const shapeBadge = document.querySelector('#shape-badge');
 const shapeNote = document.querySelector('#shape-note');
 const inputs = [...form.querySelectorAll('input[type="number"]')];
@@ -51,6 +53,7 @@ function render() {
     currentTemplate = null;
     preview.innerHTML = `<p>${text('waitingNote')}</p>`;
     downloadButton.disabled = true;
+    downloadPngButton.disabled = true;
     shapeBadge.textContent = text('waiting');
     shapeNote.textContent = text('matchingDiameters');
     return;
@@ -59,6 +62,7 @@ function render() {
   currentTemplate = buildTemplate(measurements, {includeGlueTab: glueTab.checked});
   preview.innerHTML = createSvgMarkup(currentTemplate, {filled: filledTemplate.checked});
   downloadButton.disabled = false;
+  downloadPngButton.disabled = false;
   const isStraight = currentTemplate.kind === 'straight';
   shapeBadge.textContent = isStraight ? text('straightGlass') : text('conicalGlass');
   shapeNote.textContent = isStraight ? text('straightNote') : text('conicalNote');
@@ -76,6 +80,28 @@ function downloadSvg() {
   URL.revokeObjectURL(url);
 }
 
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+async function downloadPng() {
+  if (!currentTemplate) return;
+  downloadPngButton.disabled = true;
+  downloadPngButton.textContent = text('preparingPng');
+  try {
+    const png = await createPngBlob(currentTemplate, {filled: filledTemplate.checked});
+    downloadBlob(png, `glass-wrap-${currentTemplate.kind}${currentTemplate.tabWidth ? '-with-tab' : ''}.png`);
+  } finally {
+    downloadPngButton.textContent = text('downloadPng');
+    downloadPngButton.disabled = false;
+  }
+}
+
 form.addEventListener('input', (event) => {
   if (event.target.matches('input[type="number"]')) touchedFields.add(event.target.name);
   render();
@@ -88,6 +114,7 @@ language.addEventListener('change', () => {
   render();
 });
 downloadButton.addEventListener('click', downloadSvg);
+downloadPngButton.addEventListener('click', downloadPng);
 language.value = locale;
 renderStaticText();
 render();
