@@ -30,10 +30,11 @@ the existing Node domain tests. Run the same suite against the current UI first
 and keep it green throughout the migration.
 
 Baseline status: the Playwright suite is established and passing for shared
-language navigation, valid Glass Wrap exports and unit conversion, and Sticker
-Counter defaults, full-grid rendering, custom 300 mm widths, square aspect
-ratio, and unit labels. Extend it with the remaining PNG, download, toggle,
-and overview-cap cases before replacing the corresponding UI behavior.
+language navigation; Glass Wrap validity, unit conversion, fill/tab preview,
+and SVG/PNG downloads; and Sticker Counter defaults, full-grid rendering,
+custom 300 mm widths, square aspect ratio, and unit labels. Extend it with the
+remaining Sticker Counter PNG and overview-cap cases before replacing that
+utility's UI behavior.
 
 ### Shared/hub coverage
 
