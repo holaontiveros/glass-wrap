@@ -12,59 +12,8 @@
   </head>
   <body>
     <div data-nenufar-header data-root-path="../" data-logo-path="../assets/nenufar_logo_horizontal.svg"></div>
-    <main class="app-shell">
-      <section class="intro" aria-labelledby="page-title">
-        <p class="eyebrow" data-i18n="eyebrow">SVG TEMPLATE TOOL</p>
-        <h1 id="page-title" data-i18n="heading">Glass Wrap</h1>
-        <p data-i18n="intro">Enter the outside dimensions of your glass. Download a cut outline that prints at actual size.</p>
-      </section>
-
-      <section class="workspace" aria-label="Glass wrap generator">
-        <form id="measurements-form" class="controls" novalidate>
-          <div class="section-heading">
-            <p class="eyebrow" data-i18n="measurements">MEASUREMENTS</p>
-            <p data-i18n="measurementsNote">All measurements are in millimeters.</p>
-            <label class="unit-control" for="unit"><span data-i18n="units">Units</span><select id="unit"><option value="mm">mm</option><option value="cm">cm</option></select></label>
-          </div>
-
-          <label for="top-diameter"><span data-unit-label="topDiameter">Top diameter (mm)</span>
-            <input id="top-diameter" name="topDiameter" inputmode="decimal" type="number" min="0.01" step="any" data-i18n-placeholder="example80" placeholder="e.g. 80" required />
-            <small id="top-diameter-error" class="field-error"></small>
-          </label>
-          <label for="bottom-diameter"><span data-unit-label="bottomDiameter">Bottom diameter (mm)</span>
-            <input id="bottom-diameter" name="bottomDiameter" inputmode="decimal" type="number" min="0.01" step="any" data-i18n-placeholder="example70" placeholder="e.g. 70" required />
-            <small id="bottom-diameter-error" class="field-error"></small>
-          </label>
-          <label for="glass-height"><span data-unit-label="height">Glass height (mm)</span>
-            <input id="glass-height" name="height" inputmode="decimal" type="number" min="0.01" step="any" data-i18n-placeholder="example120" placeholder="e.g. 120" required />
-            <small id="glass-height-error" class="field-error"></small>
-          </label>
-
-          <p id="shape-note" class="shape-note" aria-live="polite" data-i18n="matchingDiameters">Matching diameters create a straight wrap.</p>
-          <label class="tab-option" for="glue-tab">
-            <input id="glue-tab" name="glueTab" type="checkbox" />
-            <span><strong data-i18n="addGlueTab">Add 10 mm glue tab</strong><small data-i18n="glueTabNote">Use for wraps that will be glued rather than printed on sticker paper.</small></span>
-          </label>
-          <label class="tab-option" for="filled-template">
-            <input id="filled-template" name="filledTemplate" type="checkbox" />
-            <span><strong data-i18n="fillTemplate">Fill template with Nenúfar pink</strong><small data-i18n="fillTemplateNote">Off keeps the preview and SVG as a contour only.</small></span>
-          </label>
-          <div class="download-actions"><button id="download" type="button" disabled data-i18n="downloadSvg">Download SVG</button><button id="download-png" type="button" disabled data-i18n="downloadPng">Download PNG</button></div>
-        </form>
-
-        <section class="preview-panel" aria-labelledby="preview-title">
-          <div class="preview-heading">
-            <div><p class="eyebrow" data-i18n="livePreview">LIVE PREVIEW</p><h2 id="preview-title" data-i18n="cutOutline">Your cut outline</h2></div>
-            <span id="shape-badge" class="shape-badge" data-i18n="waiting">Waiting for dimensions</span>
-          </div>
-          <div id="preview" class="preview" aria-live="polite">
-            <p data-i18n="waitingNote">Enter all three measurements to see the template.</p>
-          </div>
-          <p class="preview-note" data-i18n="previewNote">The outline is shown to fit this panel. The downloaded SVG retains its real millimeter dimensions.</p>
-        </section>
-      </section>
-    </main>
+    <div id="glass-wrap-app"></div>
     <script type="module" src="../shared/header.js"></script>
-    <script type="module" src="./app.js?v=units-1"></script>
+    <script type="module" src="./arrow-app.js"></script>
   </body>
 </html>
