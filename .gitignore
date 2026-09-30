@@ -8,6 +8,8 @@ node_modules/
 
 # Test coverage and diagnostic output
 coverage/
+test-results/
+playwright-report/
 *.log
 npm-debug.log*
 
