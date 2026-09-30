@@ -11,9 +11,14 @@ const translations = {
   },
 };
 
+const unitTranslations = {
+  en: {units: 'Units', vinylWidth: 'Vinyl width', gap: 'Gap', nenufarWidth: '{value} {unit} (Nenúfar standard)', originalSize: 'Original size: {width} × {height} {unit}', usedSpace: 'Used area: {width} × {length} {unit}', cappedOverview: 'Overview shows the first {length} {unit} of this custom length.'},
+  es: {units: 'Unidades', vinylWidth: 'Ancho del vinil', gap: 'Separación', nenufarWidth: '{value} {unit} (estándar Nenúfar)', originalSize: 'Tamaño original: {width} × {height} {unit}', usedSpace: 'Área usada: {width} × {length} {unit}', cappedOverview: 'La vista general muestra los primeros {length} {unit} de este largo personalizado.'},
+};
+
 export function translate(locale, key, values = {}) {
   return Object.entries(values).reduce(
     (text, [name, value]) => text.replace(`{${name}}`, value),
-    translations[resolveLocale(locale)]?.[key] ?? translations.en[key] ?? key,
+    {...translations[resolveLocale(locale)], ...unitTranslations[resolveLocale(locale)]}[key] ?? translations.en[key] ?? key,
   );
 }

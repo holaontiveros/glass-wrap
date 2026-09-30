@@ -33,6 +33,9 @@ workflow, design editor, material presets, or support for inches.
 - Measurements can be entered in millimeters or centimeters. Millimeters are
   the default, and changing units converts entered values while preserving the
   underlying physical dimensions.
+- Every physical-measurement utility uses the same mm/cm selector and displays
+  inputs, presets, and calculated dimensions in the selected unit while
+  retaining millimeters for domain calculations.
 - Preview and exported artwork are rotated 90° into the intended orientation;
   this swaps SVG/PNG page width and height without changing the cut shape's
   physical dimensions.
@@ -54,14 +57,15 @@ workflow, design editor, material presets, or support for inches.
 - Sticker Counter supports circles, squares, and uploaded PNGs. A PNG keeps
   its complete rectangular canvas, including transparent padding; its selected
   size applies to the longest side while preserving aspect ratio.
-- Sticker size quick options are 3, 4, 5, 6, and 7 cm, with a manual size
-  option. PNGs can restore their embedded physical size, using 300 DPI when no
-  PNG resolution metadata is present.
-- Gap quick options are 3, 4, 5, and 6 mm, with a manual option. The only
-  spacing is between stickers: no outer roll margins are reserved. The default
-  is 4 mm.
-- Print-length quick options are 0.5, 1, 1.5, and 2 m, with a manual option.
-  The default is 1 m.
+- Sticker size quick options represent 3, 4, 5, 6, and 7 cm, with a manual
+  size option; all appear in the selected mm/cm unit. PNGs can restore their
+  embedded physical size, using 300 DPI when no PNG resolution metadata is
+  present.
+- Gap quick options represent 3, 4, 5, and 6 mm, with a manual option. The
+  only spacing is between stickers: no outer roll margins are reserved. The
+  default is 4 mm.
+- Print-length quick options represent 0.5, 1, 1.5, and 2 m, with a manual
+  option; all appear in the selected mm/cm unit. The default is 1 m.
   The overview renders the whole sheet only through 2 m; longer custom sheets
   show a capped overview and retain a zoomed sticker-inspection mode.
 - The count includes only complete stickers. Items are placed left to right,

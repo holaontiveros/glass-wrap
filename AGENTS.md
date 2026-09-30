@@ -50,10 +50,14 @@ the white logo for future dark surfaces.
 
 ## Units
 
-- Glass Wrap accepts only millimeters and centimeters; default to millimeters.
-- Normalize displayed measurements to millimeters before validation and geometry
-  calculation. Switching units must convert current entries without changing
-  the physical wrap.
+- Every utility with physical measurements accepts only millimeters and
+  centimeters; default to millimeters.
+- Normalize displayed measurements to millimeters before validation and domain
+  calculation. Switching units must convert current manual entries without
+  changing the physical result; quick presets retain their physical size.
+- Display every numeric input, option, and calculated dimension using the
+  selected unit. Reuse `site/shared/units.js`; do not duplicate conversion
+  logic in utilities.
 
 ## Engineering principles
 

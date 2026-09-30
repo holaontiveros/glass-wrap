@@ -20,21 +20,22 @@
       <section class="workspace" aria-label="Sticker counter">
         <form class="controls" novalidate>
           <p class="eyebrow" data-i18n="setup">SETUP</p>
-          <label for="vinyl-width"><span data-i18n="vinylWidth">Vinyl width (mm)</span><select id="vinyl-width"><option value="480" selected data-i18n="nenufarWidth">480 mm (Nenúfar standard)</option><option value="manual" data-i18n="manual">Manual</option></select></label>
-          <label id="manual-width" class="is-hidden" for="width-value"><span data-i18n="vinylWidth">Vinyl width (mm)</span><input id="width-value" type="number" min="0.01" step="any" inputmode="decimal" /></label>
+          <label class="unit-control" for="unit"><span data-i18n="units">Units</span><select id="unit"><option value="mm">mm</option><option value="cm">cm</option></select></label>
+          <label for="vinyl-width"><span data-unit-label="vinylWidth">Vinyl width (mm)</span><select id="vinyl-width"><option value="480" selected>480 mm (Nenúfar standard)</option><option value="manual" data-i18n="manual">Manual</option></select></label>
+          <label id="manual-width" class="is-hidden" for="width-value"><span data-unit-label="vinylWidth">Vinyl width (mm)</span><input id="width-value" type="number" min="0.01" step="any" inputmode="decimal" /></label>
           <label for="shape"><span data-i18n="shape">Sticker type</span><select id="shape"><option value="circle" data-i18n="circle">Circle</option><option value="square" data-i18n="square">Square</option><option value="png" data-i18n="png">PNG image</option></select></label>
           <label id="png-upload" class="is-hidden" for="png-file"><span data-i18n="uploadPng">Upload PNG</span><input id="png-file" type="file" accept="image/png" /><small data-i18n="uploadNote">PNG transparent padding is included in its size.</small></label>
 
-          <label for="sticker-size"><span data-i18n="stickerSize">Sticker size</span><select id="sticker-size"><option value="3">3 cm</option><option value="4">4 cm</option><option value="5" selected>5 cm</option><option value="6">6 cm</option><option value="7">7 cm</option><option value="manual" data-i18n="manual">Manual</option></select></label>
-          <label id="manual-size" class="is-hidden" for="size-value"><span data-i18n="sizeCm">Size (cm)</span><input id="size-value" type="number" min="0.01" step="any" inputmode="decimal" /></label>
+          <label for="sticker-size"><span data-unit-label="stickerSize">Sticker size (mm)</span><select id="sticker-size"><option value="30">30 mm</option><option value="40">40 mm</option><option value="50" selected>50 mm</option><option value="60">60 mm</option><option value="70">70 mm</option><option value="manual" data-i18n="manual">Manual</option></select></label>
+          <label id="manual-size" class="is-hidden" for="size-value"><span data-unit-label="stickerSize">Sticker size (mm)</span><input id="size-value" type="number" min="0.01" step="any" inputmode="decimal" /></label>
           <button id="restore-original" class="secondary is-hidden" type="button" data-i18n="restoreOriginal">Restore original PNG size</button>
           <p id="original-size" class="field-note is-hidden"></p>
 
-          <label for="gap"><span data-i18n="gap">Gap (mm)</span><select id="gap"><option value="3">3 mm</option><option value="4" selected>4 mm</option><option value="5">5 mm</option><option value="6">6 mm</option><option value="manual" data-i18n="manual">Manual</option></select></label>
-          <label id="manual-gap" class="is-hidden" for="gap-value"><span data-i18n="gap">Gap (mm)</span><input id="gap-value" type="number" min="0" step="any" inputmode="decimal" /></label>
+          <label for="gap"><span data-unit-label="gap">Gap (mm)</span><select id="gap"><option value="3">3 mm</option><option value="4" selected>4 mm</option><option value="5">5 mm</option><option value="6">6 mm</option><option value="manual" data-i18n="manual">Manual</option></select></label>
+          <label id="manual-gap" class="is-hidden" for="gap-value"><span data-unit-label="gap">Gap (mm)</span><input id="gap-value" type="number" min="0" step="any" inputmode="decimal" /></label>
 
-          <label for="length"><span data-i18n="length">Print length</span><select id="length"><option value="0.5">0.5 m</option><option value="1" selected>1 m</option><option value="1.5">1.5 m</option><option value="2">2 m</option><option value="manual" data-i18n="manual">Manual</option></select></label>
-          <label id="manual-length" class="is-hidden" for="length-value"><span data-i18n="lengthM">Length (m)</span><input id="length-value" type="number" min="0.01" step="any" inputmode="decimal" /></label>
+          <label for="length"><span data-unit-label="length">Print length (mm)</span><select id="length"><option value="500">500 mm</option><option value="1000" selected>1000 mm</option><option value="1500">1500 mm</option><option value="2000">2000 mm</option><option value="manual" data-i18n="manual">Manual</option></select></label>
+          <label id="manual-length" class="is-hidden" for="length-value"><span data-unit-label="length">Print length (mm)</span><input id="length-value" type="number" min="0.01" step="any" inputmode="decimal" /></label>
           <small id="form-error" class="field-error" aria-live="polite"></small>
           <aside class="ordering-help"><p data-i18n="orderingHelp">Use this tool to estimate how many identical stickers fit before ordering them from us.</p><a href="https://nenufar.mx" data-i18n="orderStickers">Order printed stickers</a></aside>
         </form>

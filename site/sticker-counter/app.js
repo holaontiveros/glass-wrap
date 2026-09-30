@@ -2,8 +2,10 @@ import {calculateGrid, overviewItemPositions, previewFrame, previewSheetRatio, O
 import {originalPngSizeMm, pngPixelsPerMeter} from './png.js';
 import {resolveLocale, translate} from './i18n.js';
 import {getPreferredLocale, getSessionStorage, savePreferredLocale} from '../shared/locale.js';
+import {convertUnits, unitToMillimeters} from '../shared/units.js';
 
 const controls = {
+  unit: document.querySelector('#unit'),
   vinylWidth: document.querySelector('#vinyl-width'), manualWidth: document.querySelector('#manual-width'), widthValue: document.querySelector('#width-value'),
   shape: document.querySelector('#shape'), pngUpload: document.querySelector('#png-upload'), pngFile: document.querySelector('#png-file'),
   stickerSize: document.querySelector('#sticker-size'), manualSize: document.querySelector('#manual-size'), sizeValue: document.querySelector('#size-value'),
@@ -19,13 +21,14 @@ const language = document.querySelector('#language');
 const languageStorage = getSessionStorage(window);
 
 let locale = getPreferredLocale(navigator.language, languageStorage);
+let selectedUnit = 'mm';
 let viewMode = 'overview';
 let png = null;
 
 const text = (key, values) => translate(locale, key, values);
 const number = (value) => Number(value);
-const selectedValue = (select, input) => select.value === 'manual' ? number(input.value) : number(select.value);
-const cm = (millimeters) => (millimeters / 10).toFixed(2).replace(/\.00$/, '');
+const selectedMillimeters = (select, input) => select.value === 'manual' ? unitToMillimeters(number(input.value), selectedUnit) : number(select.value);
+const displayMeasurement = (millimeters) => String(Number(convertUnits(millimeters, 'mm', selectedUnit).toFixed(3)));
 
 function renderStaticText() {
   document.documentElement.lang = locale;
@@ -33,10 +36,17 @@ function renderStaticText() {
   document.querySelector('#page-description').content = text('pageDescription');
   document.querySelectorAll('[data-i18n]').forEach((element) => { element.textContent = text(element.dataset.i18n); });
   document.querySelectorAll('[data-i18n-aria]').forEach((element) => { element.setAttribute('aria-label', text(element.dataset.i18nAria)); });
+  document.querySelectorAll('[data-unit-label]').forEach((element) => { element.textContent = `${text(element.dataset.unitLabel)} (${selectedUnit})`; });
+  document.querySelector('#vinyl-width option[value="480"]').textContent = text('nenufarWidth', {value: displayMeasurement(480), unit: selectedUnit});
+  for (const select of [controls.stickerSize, controls.gap, controls.length]) {
+    [...select.options].filter((option) => option.value !== 'manual').forEach((option) => {
+      option.textContent = `${displayMeasurement(number(option.value))} ${selectedUnit}`;
+    });
+  }
 }
 
 function itemDimensions() {
-  const sizeMm = selectedValue(controls.stickerSize, controls.sizeValue) * 10;
+  const sizeMm = selectedMillimeters(controls.stickerSize, controls.sizeValue);
   if (controls.shape.value !== 'png' || !png) return {width: sizeMm, height: sizeMm};
   const longestSide = Math.max(png.width, png.height);
   return {width: sizeMm * png.width / longestSide, height: sizeMm * png.height / longestSide};
@@ -97,13 +107,13 @@ function renderPreview(grid, dimensions, gap, vinylWidth, length) {
     sheet.append(sticker);
   }
   preview.append(sheet);
-  document.querySelector('#preview-note').textContent = length > OVERVIEW_MAX_LENGTH_MM ? text('cappedOverview') : text('overviewNote');
+  document.querySelector('#preview-note').textContent = length > OVERVIEW_MAX_LENGTH_MM ? text('cappedOverview', {length: displayMeasurement(OVERVIEW_MAX_LENGTH_MM), unit: selectedUnit}) : text('overviewNote');
 }
 
 function render() {
-  const vinylWidth = selectedValue(controls.vinylWidth, controls.widthValue);
-  const gap = selectedValue(controls.gap, controls.gapValue);
-  const length = selectedValue(controls.length, controls.lengthValue) * 1000;
+  const vinylWidth = selectedMillimeters(controls.vinylWidth, controls.widthValue);
+  const gap = selectedMillimeters(controls.gap, controls.gapValue);
+  const length = selectedMillimeters(controls.length, controls.lengthValue);
   const dimensions = itemDimensions();
   const valid = [vinylWidth, gap, length, dimensions.width, dimensions.height].every(Number.isFinite) && vinylWidth > 0 && gap >= 0 && length > 0 && dimensions.width > 0 && dimensions.height > 0;
   controls.error.textContent = valid ? '' : text('invalidValue');
@@ -113,7 +123,7 @@ function render() {
   document.querySelector('#rows').textContent = grid.rows;
   document.querySelector('#total').textContent = grid.total;
   document.querySelector('#total-stat').textContent = grid.total;
-  document.querySelector('#used-space').textContent = grid.total ? text('usedSpace', {width: grid.usedWidth.toFixed(1), length: grid.usedLength.toFixed(1)}) : '';
+  document.querySelector('#used-space').textContent = grid.total ? text('usedSpace', {width: displayMeasurement(grid.usedWidth), length: displayMeasurement(grid.usedLength), unit: selectedUnit}) : '';
   renderPreview(grid, dimensions, gap, vinylWidth, length);
 }
 
@@ -139,10 +149,10 @@ async function loadPng() {
     png = {url, width: image.naturalWidth, height: image.naturalHeight, original};
     controls.restoreOriginal.classList.remove('is-hidden');
     controls.originalSize.classList.remove('is-hidden');
-    controls.originalSize.textContent = text('originalSize', {width: cm(original.width), height: cm(original.height)});
+    controls.originalSize.textContent = text('originalSize', {width: displayMeasurement(original.width), height: displayMeasurement(original.height), unit: selectedUnit});
     controls.stickerSize.value = 'manual';
     controls.manualSize.classList.remove('is-hidden');
-    controls.sizeValue.value = cm(Math.max(original.width, original.height));
+    controls.sizeValue.value = displayMeasurement(Math.max(original.width, original.height));
     render();
   };
   image.src = url;
@@ -154,7 +164,7 @@ controls.restoreOriginal.addEventListener('click', () => {
   if (!png) return;
   controls.stickerSize.value = 'manual';
   controls.manualSize.classList.remove('is-hidden');
-  controls.sizeValue.value = cm(Math.max(png.original.width, png.original.height));
+  controls.sizeValue.value = displayMeasurement(Math.max(png.original.width, png.original.height));
   render();
 });
 for (const [select, field] of [[controls.vinylWidth, controls.manualWidth], [controls.stickerSize, controls.manualSize], [controls.gap, controls.manualGap], [controls.length, controls.manualLength]]) {
@@ -164,6 +174,17 @@ document.querySelector('form').addEventListener('input', render);
 overviewButton.addEventListener('click', () => { viewMode = 'overview'; overviewButton.classList.add('active'); inspectionButton.classList.remove('active'); render(); });
 inspectionButton.addEventListener('click', () => { viewMode = 'inspection'; inspectionButton.classList.add('active'); overviewButton.classList.remove('active'); render(); });
 language.value = locale;
-language.addEventListener('change', () => { locale = resolveLocale(language.value); savePreferredLocale(locale, languageStorage); renderStaticText(); if (png) controls.originalSize.textContent = text('originalSize', {width: cm(png.original.width), height: cm(png.original.height)}); render(); });
+language.addEventListener('change', () => { locale = resolveLocale(language.value); savePreferredLocale(locale, languageStorage); renderStaticText(); if (png) controls.originalSize.textContent = text('originalSize', {width: displayMeasurement(png.original.width), height: displayMeasurement(png.original.height), unit: selectedUnit}); render(); });
+controls.unit.addEventListener('change', () => {
+  const nextUnit = controls.unit.value;
+  for (const input of [controls.widthValue, controls.sizeValue, controls.gapValue, controls.lengthValue]) {
+    if (input.value !== '') input.value = String(Number(convertUnits(number(input.value), selectedUnit, nextUnit).toFixed(3)));
+  }
+  selectedUnit = nextUnit;
+  renderStaticText();
+  if (png) controls.originalSize.textContent = text('originalSize', {width: displayMeasurement(png.original.width), height: displayMeasurement(png.original.height), unit: selectedUnit});
+  render();
+});
+controls.unit.value = selectedUnit;
 renderStaticText();
 render();
