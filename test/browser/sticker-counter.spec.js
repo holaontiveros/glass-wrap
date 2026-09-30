@@ -33,3 +33,34 @@ test('Sticker Counter changes its physical labels to centimeters without changin
   await expect(page.locator('#vinyl-width option[value="480"]')).toHaveText('48 cm (Nenúfar standard)');
   await expect(page.locator('#total')).toHaveText('144');
 });
+
+test('Sticker Counter caps long overview sheets and retains the inspection view', async ({page}) => {
+  await page.goto('/sticker-counter/');
+
+  await page.locator('#length').selectOption('manual');
+  await page.locator('#length-value').fill('3000');
+  await expect(page.locator('#preview-note')).toContainText('2000 mm');
+  await expect(page.locator('.overview-sheet')).toHaveCSS('--overview-length', '2000');
+
+  await page.locator('#inspection-button').click();
+  await expect(page.locator('.inspection-cell .sticker')).toBeVisible();
+});
+
+test('Sticker Counter restores an uploaded PNG to its physical size', async ({page}) => {
+  await page.goto('/sticker-counter/');
+  const imageData = await page.evaluate(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 120;
+    canvas.height = 60;
+    return canvas.toDataURL('image/png').split(',')[1];
+  });
+
+  await page.locator('#shape').selectOption('png');
+  await page.locator('#png-file').setInputFiles({name: 'sticker.png', mimeType: 'image/png', buffer: Buffer.from(imageData, 'base64')});
+  await expect(page.locator('#original-size')).toContainText('10.16');
+
+  await page.locator('#sticker-size').selectOption('manual');
+  await page.locator('#size-value').fill('20');
+  await page.locator('#restore-original').click();
+  await expect(page.locator('#size-value')).toHaveValue('10.16');
+});
