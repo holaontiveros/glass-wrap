@@ -61,8 +61,8 @@ and keep it green throughout the migration.
 
 ## Phase 1 — shared Arrow foundation
 
-1. Add the pinned Arrow core runtime using a delivery mechanism compatible with
-   static GitHub Pages deployment.
+1. Add the pinned Arrow core runtime using the static-page import map for
+   `@arrow-js/core@1.0.6`.
 2. Add a small Arrow mount helper and a shared reactive page-language adapter.
 3. Port the shared header without changing its markup contract, paths, visual
    styling, or session storage key.

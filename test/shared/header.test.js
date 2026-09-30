@@ -2,21 +2,12 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import {getPreferredLocale, languageStorageKey, savePreferredLocale} from '../../site/shared/locale.js';
-import {headerMarkup} from '../../site/shared/header.js';
+import {headerOptions} from '../../site/shared/header-config.js';
 
-test('renders a brand link to the apps hub with the supplied color logo', () => {
-  const markup = headerMarkup({
-    rootPath: '../',
-    logoPath: '../assets/nenufar_logo_horizontal.svg',
-  });
+test('reads the brand-link and logo paths for a utility header', () => {
+  const options = headerOptions({dataset: {rootPath: '../', logoPath: '../assets/nenufar_logo_horizontal.svg'}});
 
-  assert.match(markup, /href="\.\.\/"/);
-  assert.match(markup, /src="\.\.\/assets\/nenufar_logo_horizontal\.svg"/);
-  assert.match(markup, /nenufar-apps-header__nav/);
-  assert.match(markup, /data-i18n="apps"/);
-  assert.match(markup, /href="https:\/\/nenufar\.mx"/);
-  assert.match(markup, /id="language"/);
-  assert.match(markup, /nenufar-apps-header__actions/);
+  assert.deepEqual(options, {rootPath: '../', logoPath: '../assets/nenufar_logo_horizontal.svg'});
 });
 
 test('keeps a selected language for the current browser session', () => {
