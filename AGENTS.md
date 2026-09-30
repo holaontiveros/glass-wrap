@@ -71,6 +71,18 @@ the white logo for future dark surfaces.
   captures the expected behavior or invariant, then implement the smallest
   change that makes it pass, then refactor while retaining coverage.
 
+## Arrow.js migration
+
+- Follow `ARROW_MIGRATION_PLAN.md` for the staged Arrow.js port.
+- Start each tool port by adding browser-level characterization tests for the
+  current behavior; retain the existing Node domain tests.
+- Arrow owns reactive UI state and templates only. Domain, export, locale, and
+  unit modules must remain framework-independent.
+- Port one tool at a time and preserve public paths, native accessibility,
+  language/session behavior, unit behavior, and download/upload outcomes.
+- Do not remove legacy UI orchestration until the relevant parity suite passes
+  and the tool has been manually checked in both languages.
+
 ## Domain rules
 
 - Inputs are manual and expressed only in millimeters.

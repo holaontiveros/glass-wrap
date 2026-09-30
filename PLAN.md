@@ -36,6 +36,9 @@ workflow, design editor, material presets, or support for inches.
 - Every physical-measurement utility uses the same mm/cm selector and displays
   inputs, presets, and calculated dimensions in the selected unit while
   retaining millimeters for domain calculations.
+- The UI will migrate to Arrow.js tool by tool, beginning with browser-level
+  parity tests. Existing domain modules remain framework-independent, and no
+  tool's imperative UI is removed until Arrow.js matches current behavior.
 - Preview and exported artwork are rotated 90° into the intended orientation;
   this swaps SVG/PNG page width and height without changing the cut shape's
   physical dimensions.

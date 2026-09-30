@@ -8,6 +8,11 @@ directly to its public URL path.
 utility. It shows the color logo, centered Apps and Shop navigation, and a
 language selector. User-facing content is available in English and Spanish.
 
+## Arrow.js migration
+
+The staged Arrow.js migration and behavior-parity test requirements are
+documented in [ARROW_MIGRATION_PLAN.md](./ARROW_MIGRATION_PLAN.md).
+
 ## Available utilities
 
 - `site/glass-wrap/` → `/glass-wrap/`: print-accurate SVG templates for
