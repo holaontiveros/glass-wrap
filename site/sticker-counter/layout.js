@@ -55,3 +55,7 @@ export function previewFrame(position, {vinylWidth, overviewLength}) {
     height: position.height / overviewLength * 100,
   };
 }
+
+export function previewSheetRatio({vinylWidth, overviewLength}) {
+  return vinylWidth / overviewLength;
+}

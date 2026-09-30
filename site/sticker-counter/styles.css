@@ -36,7 +36,7 @@ h2 { margin-bottom: 0; font-size: clamp(3rem, 7vw, 6rem); line-height: .82; lett
 .stats b { font-size: 1.4rem; }
 .stats small { margin-top: .2rem; color: #efc8d7; font-size: .72rem; }
 .preview { display: grid; place-items: center; min-height: 26rem; margin-top: 1rem; padding: 1.4rem; overflow: auto; border-radius: .9rem; background-color: #2a1029; background-image: linear-gradient(rgba(241, 116, 158, .08) 1px, transparent 1px), linear-gradient(90deg, rgba(241, 116, 158, .08) 1px, transparent 1px); background-size: 18px 18px; }
-.overview-sheet { position: relative; width: min(100%, calc(42rem / var(--sheet-ratio))); aspect-ratio: 480 / var(--overview-length); border: 1px solid #ffc2d5; background: rgba(255, 255, 255, .92); }
+.overview-sheet { position: relative; width: min(100%, calc(42rem * var(--sheet-ratio))); aspect-ratio: var(--vinyl-width) / var(--overview-length); border: 1px solid #ffc2d5; background: rgba(255, 255, 255, .92); }
 .overview-sheet .sticker { position: absolute; }
 .sticker { min-width: 0; min-height: 0; border: 1px solid #672c66; background: #f1749e; overflow: hidden; }
 .sticker.circle { border-radius: 50%; }

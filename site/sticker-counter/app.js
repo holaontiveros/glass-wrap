@@ -1,4 +1,4 @@
-import {calculateGrid, overviewItemPositions, previewFrame, OVERVIEW_MAX_LENGTH_MM} from './layout.js';
+import {calculateGrid, overviewItemPositions, previewFrame, previewSheetRatio, OVERVIEW_MAX_LENGTH_MM} from './layout.js';
 import {originalPngSizeMm, pngPixelsPerMeter} from './png.js';
 import {resolveLocale, translate} from './i18n.js';
 import {getPreferredLocale, getSessionStorage, savePreferredLocale} from '../shared/locale.js';
@@ -83,7 +83,8 @@ function renderPreview(grid, dimensions, gap, vinylWidth, length) {
   });
   const sheet = document.createElement('div');
   sheet.className = 'overview-sheet';
-  sheet.style.setProperty('--sheet-ratio', overviewLength / vinylWidth);
+  sheet.style.setProperty('--sheet-ratio', previewSheetRatio({vinylWidth, overviewLength}));
+  sheet.style.setProperty('--vinyl-width', vinylWidth);
   sheet.style.setProperty('--overview-length', overviewLength);
   sheet.style.width = `${Math.min(100, (vinylWidth / overviewLength) * 100)}%`;
   for (const position of positions) {
