@@ -1,9 +1,10 @@
-import {calculateGrid, overviewItemPositions, OVERVIEW_MAX_LENGTH_MM, VINYL_WIDTH_MM} from './layout.js';
+import {calculateGrid, overviewItemPositions, previewFrame, OVERVIEW_MAX_LENGTH_MM} from './layout.js';
 import {originalPngSizeMm, pngPixelsPerMeter} from './png.js';
 import {resolveLocale, translate} from './i18n.js';
 import {getPreferredLocale, getSessionStorage, savePreferredLocale} from '../shared/locale.js';
 
 const controls = {
+  vinylWidth: document.querySelector('#vinyl-width'), manualWidth: document.querySelector('#manual-width'), widthValue: document.querySelector('#width-value'),
   shape: document.querySelector('#shape'), pngUpload: document.querySelector('#png-upload'), pngFile: document.querySelector('#png-file'),
   stickerSize: document.querySelector('#sticker-size'), manualSize: document.querySelector('#manual-size'), sizeValue: document.querySelector('#size-value'),
   restoreOriginal: document.querySelector('#restore-original'), originalSize: document.querySelector('#original-size'),
@@ -53,7 +54,7 @@ function createSticker(dimensions) {
   return sticker;
 }
 
-function renderPreview(grid, dimensions, gap, length) {
+function renderPreview(grid, dimensions, gap, vinylWidth, length) {
   preview.replaceChildren();
   if (!grid.total) {
     preview.textContent = controls.shape.value === 'png' && !png ? text('choosePng') : text('noFit');
@@ -82,15 +83,16 @@ function renderPreview(grid, dimensions, gap, length) {
   });
   const sheet = document.createElement('div');
   sheet.className = 'overview-sheet';
-  sheet.style.setProperty('--sheet-ratio', overviewLength / VINYL_WIDTH_MM);
+  sheet.style.setProperty('--sheet-ratio', overviewLength / vinylWidth);
   sheet.style.setProperty('--overview-length', overviewLength);
-  sheet.style.width = `${Math.min(100, (VINYL_WIDTH_MM / overviewLength) * 100)}%`;
+  sheet.style.width = `${Math.min(100, (vinylWidth / overviewLength) * 100)}%`;
   for (const position of positions) {
+    const frame = previewFrame(position, {vinylWidth, overviewLength});
     const sticker = createSticker(dimensions);
-    sticker.style.left = `${position.left / VINYL_WIDTH_MM * 100}%`;
-    sticker.style.top = `${position.top / overviewLength * 100}%`;
-    sticker.style.width = `${position.width / VINYL_WIDTH_MM * 100}%`;
-    sticker.style.height = `${position.height / overviewLength * 100}%`;
+    sticker.style.left = `${frame.left}%`;
+    sticker.style.top = `${frame.top}%`;
+    sticker.style.width = `${frame.width}%`;
+    sticker.style.height = `${frame.height}%`;
     sheet.append(sticker);
   }
   preview.append(sheet);
@@ -98,19 +100,20 @@ function renderPreview(grid, dimensions, gap, length) {
 }
 
 function render() {
+  const vinylWidth = selectedValue(controls.vinylWidth, controls.widthValue);
   const gap = selectedValue(controls.gap, controls.gapValue);
   const length = selectedValue(controls.length, controls.lengthValue) * 1000;
   const dimensions = itemDimensions();
-  const valid = [gap, length, dimensions.width, dimensions.height].every(Number.isFinite) && gap >= 0 && length > 0 && dimensions.width > 0 && dimensions.height > 0;
+  const valid = [vinylWidth, gap, length, dimensions.width, dimensions.height].every(Number.isFinite) && vinylWidth > 0 && gap >= 0 && length > 0 && dimensions.width > 0 && dimensions.height > 0;
   controls.error.textContent = valid ? '' : text('invalidValue');
-  const grid = valid ? calculateGrid({itemWidth: dimensions.width, itemHeight: dimensions.height, gap, length}) : calculateGrid({});
+  const grid = valid ? calculateGrid({vinylWidth, itemWidth: dimensions.width, itemHeight: dimensions.height, gap, length}) : calculateGrid({});
 
   document.querySelector('#columns').textContent = grid.columns;
   document.querySelector('#rows').textContent = grid.rows;
   document.querySelector('#total').textContent = grid.total;
   document.querySelector('#total-stat').textContent = grid.total;
   document.querySelector('#used-space').textContent = grid.total ? text('usedSpace', {width: grid.usedWidth.toFixed(1), length: grid.usedLength.toFixed(1)}) : '';
-  renderPreview(grid, dimensions, gap, length);
+  renderPreview(grid, dimensions, gap, vinylWidth, length);
 }
 
 function toggleManual(select, field) { field.classList.toggle('is-hidden', select.value !== 'manual'); }
@@ -153,7 +156,7 @@ controls.restoreOriginal.addEventListener('click', () => {
   controls.sizeValue.value = cm(Math.max(png.original.width, png.original.height));
   render();
 });
-for (const [select, field] of [[controls.stickerSize, controls.manualSize], [controls.gap, controls.manualGap], [controls.length, controls.manualLength]]) {
+for (const [select, field] of [[controls.vinylWidth, controls.manualWidth], [controls.stickerSize, controls.manualSize], [controls.gap, controls.manualGap], [controls.length, controls.manualLength]]) {
   select.addEventListener('change', () => { toggleManual(select, field); render(); });
 }
 document.querySelector('form').addEventListener('input', render);

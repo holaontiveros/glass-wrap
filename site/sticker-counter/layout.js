@@ -5,12 +5,12 @@ function validDimension(value) {
   return Number.isFinite(value) && value > 0;
 }
 
-export function calculateGrid({itemWidth, itemHeight, gap, length}) {
-  if (!validDimension(itemWidth) || !validDimension(itemHeight) || !validDimension(length) || !Number.isFinite(gap) || gap < 0) {
+export function calculateGrid({vinylWidth = VINYL_WIDTH_MM, itemWidth, itemHeight, gap, length}) {
+  if (!validDimension(vinylWidth) || !validDimension(itemWidth) || !validDimension(itemHeight) || !validDimension(length) || !Number.isFinite(gap) || gap < 0) {
     return {columns: 0, rows: 0, total: 0, usedWidth: 0, usedLength: 0};
   }
 
-  const columns = itemWidth > VINYL_WIDTH_MM ? 0 : Math.floor((VINYL_WIDTH_MM + gap) / (itemWidth + gap));
+  const columns = itemWidth > vinylWidth ? 0 : Math.floor((vinylWidth + gap) / (itemWidth + gap));
   const rows = itemHeight > length ? 0 : Math.floor((length + gap) / (itemHeight + gap));
   const total = columns * rows;
 
@@ -45,4 +45,13 @@ export function overviewItemPositions({columns, rows, itemWidth, itemHeight, gap
   }
 
   return positions;
+}
+
+export function previewFrame(position, {vinylWidth, overviewLength}) {
+  return {
+    left: position.left / vinylWidth * 100,
+    top: position.top / overviewLength * 100,
+    width: position.width / vinylWidth * 100,
+    height: position.height / overviewLength * 100,
+  };
 }

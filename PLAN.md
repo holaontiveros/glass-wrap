@@ -48,8 +48,9 @@ workflow, design editor, material presets, or support for inches.
   centered Apps and Shop navigation, plus a language selector, styled
   consistently with the main ecommerce site.
 - Sticker Counter is a browser-only calculator and visualizer for arranging
-  identical stickers on 480 mm-wide vinyl rolls. It does not generate a print
-  or VersaWorks layout file.
+  identical stickers on vinyl rolls. It defaults to Nenúfar's 480 mm width and
+  also accepts a custom width. It does not generate a print or VersaWorks
+  layout file.
 - Sticker Counter supports circles, squares, and uploaded PNGs. A PNG keeps
   its complete rectangular canvas, including transparent padding; its selected
   size applies to the longest side while preserving aspect ratio.
