@@ -13,7 +13,9 @@ test('Sticker Counter preserves square stickers and a correct grid with a 300 mm
   await page.goto('/sticker-counter/');
 
   await page.locator('#shape').selectOption('square');
+  await expect(page.locator('#width-value')).toBeHidden();
   await page.locator('#vinyl-width').selectOption('manual');
+  await expect(page.locator('#width-value')).toBeVisible();
   await expect(page.locator('#width-value')).toHaveCSS('background-color', 'rgb(53, 20, 49)');
   await page.locator('#width-value').fill('300');
 
@@ -25,6 +27,9 @@ test('Sticker Counter preserves square stickers and a correct grid with a 300 mm
     return width / height;
   });
   expect(stickerRatio).toBeCloseTo(1, 1);
+
+  await page.locator('#vinyl-width').selectOption('480');
+  await expect(page.locator('#width-value')).toBeHidden();
 });
 
 test('Sticker Counter changes its physical labels to centimeters without changing the count', async ({page}) => {
