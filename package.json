@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "node scripts/validate-site.js",
     "test": "node --test test/glass-wrap/*.test.js test/index/*.test.js test/shared/*.test.js test/sticker-counter/*.test.js",
     "test:browser": "playwright test"
   },

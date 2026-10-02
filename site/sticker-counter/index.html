@@ -11,45 +11,7 @@
   </head>
   <body>
     <div data-nenufar-header data-root-path="../" data-logo-path="../assets/nenufar_logo_horizontal.svg"></div>
-    <main class="app-shell">
-      <section class="intro" aria-labelledby="page-title">
-        <p class="eyebrow" data-i18n="eyebrow">VINYL LAYOUT CALCULATOR</p>
-        <h1 id="page-title" data-i18n="heading">Sticker Counter</h1>
-        <p data-i18n="intro">See exactly how many identical stickers fit on your vinyl roll.</p>
-      </section>
-
-      <section class="workspace" aria-label="Sticker counter">
-        <form class="controls" novalidate>
-          <p class="eyebrow" data-i18n="setup">SETUP</p>
-          <label class="unit-control" for="unit"><span data-i18n="units">Units</span><select id="unit"><option value="mm">mm</option><option value="cm">cm</option></select></label>
-          <label for="vinyl-width"><span data-unit-label="vinylWidth">Vinyl width (mm)</span><select id="vinyl-width"><option value="480" selected>480 mm (Nenúfar standard)</option><option value="manual" data-i18n="manual">Manual</option></select></label>
-          <label id="manual-width" class="is-hidden" for="width-value"><span data-unit-label="vinylWidth">Vinyl width (mm)</span><input id="width-value" type="number" min="0.01" step="any" inputmode="decimal" /></label>
-          <label for="shape"><span data-i18n="shape">Sticker type</span><select id="shape"><option value="circle" data-i18n="circle">Circle</option><option value="square" data-i18n="square">Square</option><option value="png" data-i18n="png">PNG image</option></select></label>
-          <label id="png-upload" class="is-hidden" for="png-file"><span data-i18n="uploadPng">Upload PNG</span><input id="png-file" type="file" accept="image/png" /><small data-i18n="uploadNote">PNG transparent padding is included in its size.</small></label>
-
-          <label for="sticker-size"><span data-unit-label="stickerSize">Sticker size (mm)</span><select id="sticker-size"><option value="30">30 mm</option><option value="40">40 mm</option><option value="50" selected>50 mm</option><option value="60">60 mm</option><option value="70">70 mm</option><option value="manual" data-i18n="manual">Manual</option></select></label>
-          <label id="manual-size" class="is-hidden" for="size-value"><span data-unit-label="stickerSize">Sticker size (mm)</span><input id="size-value" type="number" min="0.01" step="any" inputmode="decimal" /></label>
-          <button id="restore-original" class="secondary is-hidden" type="button" data-i18n="restoreOriginal">Restore original PNG size</button>
-          <p id="original-size" class="field-note is-hidden"></p>
-
-          <label for="gap"><span data-unit-label="gap">Gap (mm)</span><select id="gap"><option value="3">3 mm</option><option value="4" selected>4 mm</option><option value="5">5 mm</option><option value="6">6 mm</option><option value="manual" data-i18n="manual">Manual</option></select></label>
-          <label id="manual-gap" class="is-hidden" for="gap-value"><span data-unit-label="gap">Gap (mm)</span><input id="gap-value" type="number" min="0" step="any" inputmode="decimal" /></label>
-
-          <label for="length"><span data-unit-label="length">Print length (mm)</span><select id="length"><option value="500">500 mm</option><option value="1000" selected>1000 mm</option><option value="1500">1500 mm</option><option value="2000">2000 mm</option><option value="manual" data-i18n="manual">Manual</option></select></label>
-          <label id="manual-length" class="is-hidden" for="length-value"><span data-unit-label="length">Print length (mm)</span><input id="length-value" type="number" min="0.01" step="any" inputmode="decimal" /></label>
-          <small id="form-error" class="field-error" aria-live="polite"></small>
-          <aside class="ordering-help"><p data-i18n="orderingHelp">Use this tool to estimate how many identical stickers fit before ordering them from us.</p><a href="https://nenufar.mx" data-i18n="orderStickers">Order printed stickers</a></aside>
-        </form>
-
-        <section class="results" aria-labelledby="preview-title">
-          <div class="results-heading"><div><p class="eyebrow" data-i18n="count">STICKERS THAT FIT</p><h2 id="preview-title"><span id="total">0</span></h2></div><div class="view-switch" role="group"><button id="overview-button" type="button" class="active" data-i18n="overview">Overview</button><button id="inspection-button" type="button" data-i18n="inspection">Inspect sticker</button></div></div>
-          <div class="stats"><span><b id="columns">0</b><small data-i18n="across">Across</small></span><span><b id="rows">0</b><small data-i18n="rows">Rows</small></span><span><b id="total-stat">0</b><small data-i18n="total">Total</small></span></div>
-          <p id="used-space" class="field-note"></p>
-          <div id="preview" class="preview" aria-live="polite"></div>
-          <p id="preview-note" class="preview-note"></p>
-        </section>
-      </section>
-    </main>
+    <div id="sticker-counter-app"></div>
     <script type="module" src="../shared/header.js"></script>
     <script type="module" src="./arrow-app.js"></script>
   </body>

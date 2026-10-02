@@ -34,6 +34,22 @@ test('Sticker Counter changes its physical labels to centimeters without changin
   await expect(page.locator('#total')).toHaveText('144');
 });
 
+test('Sticker Counter updates static Spanish copy, units, and the selected view state', async ({page}) => {
+  await page.goto('/sticker-counter/');
+
+  await page.locator('#language').selectOption('es');
+  await expect(page.locator('h1')).toHaveText('Contador de stickers');
+  await expect(page.locator('#gap').locator('option[value="4"]')).toHaveText('4 mm');
+
+  await page.locator('#unit').selectOption('cm');
+  await expect(page.locator('#gap').locator('option[value="4"]')).toHaveText('0.4 cm');
+  await expect(page.locator('#used-space')).toContainText('cm');
+
+  await page.locator('#inspection-button').click();
+  await expect(page.locator('#inspection-button')).toHaveClass(/active/);
+  await expect(page.locator('#overview-button')).not.toHaveClass(/active/);
+});
+
 test('Sticker Counter caps long overview sheets and retains the inspection view', async ({page}) => {
   await page.goto('/sticker-counter/');
 

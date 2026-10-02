@@ -40,6 +40,12 @@ npm test
 The tests cover validation, straight and conical geometry, near-equal diameter
 handling, the 10 mm tab, and SVG export dimensions.
 
+Validate the static artifact that GitHub Pages uploads with:
+
+```sh
+npm run build
+```
+
 ## GitHub Pages
 
 The site is deployed from `site/` by the GitHub Actions workflow in

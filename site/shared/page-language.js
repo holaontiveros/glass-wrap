@@ -8,4 +8,5 @@ export function createPageLanguage(browserLanguage, storage) {
 export function setPageLanguage(language, locale, storage) {
   language.locale = locale;
   savePreferredLocale(locale, storage);
+  document.dispatchEvent(new CustomEvent('nenufar:languagechange', {detail: {locale}}));
 }
