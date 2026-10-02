@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "python3 -m http.server 8000 --directory site",
     "build": "node scripts/validate-site.js",
     "test": "node --test test/glass-wrap/*.test.js test/index/*.test.js test/shared/*.test.js test/sticker-counter/*.test.js",
     "test:browser": "playwright test"

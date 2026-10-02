@@ -22,9 +22,15 @@ documented in [ARROW_MIGRATION_PLAN.md](./ARROW_MIGRATION_PLAN.md).
 
 ## Use
 
-Open `site/glass-wrap/index.html` in a modern browser, or serve the `site`
-directory with any static web server. Enter the outside top diameter, bottom
-diameter, and height in millimeters. Equal diameters produce a straight
+Start a local server with:
+
+```sh
+npm run dev
+```
+
+Then open `http://localhost:8000/` or a utility directly, such as
+`http://localhost:8000/sticker-counter/`. Enter the outside top diameter,
+bottom diameter, and height in millimeters. Equal diameters produce a straight
 rectangular wrap; different diameters produce a developed conical wrap.
 
 Enable the optional 10 mm glue tab when the wrap will be glued rather than
