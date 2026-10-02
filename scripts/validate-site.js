@@ -10,6 +10,7 @@ const requiredFiles = [
   'sticker-counter/arrow-app.js',
   'shared/header.js',
   'shared/header.css',
+  'shared/analytics.js',
 ];
 
 for (const file of requiredFiles) await access(resolve(site, file));
@@ -28,6 +29,7 @@ for (const file of htmlFiles) {
   const source = await readFile(file, 'utf8');
   if (!source.includes('<!doctype html>')) throw new Error(`${file} is missing its HTML doctype`);
   if (!source.includes('type="module"')) throw new Error(`${file} is missing a module entrypoint`);
+  if (!source.includes('analytics.js')) throw new Error(`${file} is missing the shared analytics loader`);
 }
 
 console.log(`Static GitHub Pages artifact validated: ${htmlFiles.length} HTML pages and ${requiredFiles.length} required files.`);
