@@ -3,6 +3,8 @@ import {originalPngSizeMm, pngPixelsPerMeter} from './png.js';
 import {resolveLocale, translate} from './i18n.js';
 import {getPreferredLocale, getSessionStorage, savePreferredLocale} from '../shared/locale.js';
 import {convertUnits, unitToMillimeters} from '../shared/units.js';
+import {reactive} from '../shared/arrow-runtime.js';
+import {createStickerState, convertManualMeasurements, selectedMillimeters as manualMillimeters} from './state.js';
 
 const controls = {
   unit: document.querySelector('#unit'),
@@ -21,13 +23,14 @@ const language = document.querySelector('#language');
 const languageStorage = getSessionStorage(window);
 
 let locale = getPreferredLocale(navigator.language, languageStorage);
-let selectedUnit = 'mm';
-let viewMode = 'overview';
+const state = reactive(createStickerState());
+let selectedUnit = state.unit;
+let viewMode = state.viewMode;
 let png = null;
 
 const text = (key, values) => translate(locale, key, values);
 const number = (value) => Number(value);
-const selectedMillimeters = (select, input) => select.value === 'manual' ? unitToMillimeters(number(input.value), selectedUnit) : number(select.value);
+const selectedMillimeters = (select, input) => manualMillimeters(select.value, input.value, selectedUnit);
 const displayMeasurement = (millimeters) => String(Number(convertUnits(millimeters, 'mm', selectedUnit).toFixed(3)));
 
 function renderStaticText() {
@@ -47,17 +50,17 @@ function renderStaticText() {
 
 function itemDimensions() {
   const sizeMm = selectedMillimeters(controls.stickerSize, controls.sizeValue);
-  if (controls.shape.value !== 'png' || !png) return {width: sizeMm, height: sizeMm};
-  const longestSide = Math.max(png.width, png.height);
-  return {width: sizeMm * png.width / longestSide, height: sizeMm * png.height / longestSide};
+  if (controls.shape.value !== 'png' || !state.png) return {width: sizeMm, height: sizeMm};
+  const longestSide = Math.max(state.png.width, state.png.height);
+  return {width: sizeMm * state.png.width / longestSide, height: sizeMm * state.png.height / longestSide};
 }
 
 function createSticker(dimensions) {
   const sticker = document.createElement('div');
   sticker.className = `sticker ${controls.shape.value}`;
-  if (controls.shape.value === 'png' && png) {
+  if (controls.shape.value === 'png' && state.png) {
     const image = document.createElement('img');
-    image.src = png.url;
+    image.src = state.png.url;
     image.alt = '';
     sticker.append(image);
   }
@@ -67,7 +70,7 @@ function createSticker(dimensions) {
 function renderPreview(grid, dimensions, gap, vinylWidth, length) {
   preview.replaceChildren();
   if (!grid.total) {
-    preview.textContent = controls.shape.value === 'png' && !png ? text('choosePng') : text('noFit');
+    preview.textContent = controls.shape.value === 'png' && !state.png ? text('choosePng') : text('noFit');
     return;
   }
 
@@ -107,7 +110,7 @@ function renderPreview(grid, dimensions, gap, vinylWidth, length) {
     sheet.append(sticker);
   }
   preview.append(sheet);
-  document.querySelector('#preview-note').textContent = length > OVERVIEW_MAX_LENGTH_MM ? text('cappedOverview', {length: displayMeasurement(OVERVIEW_MAX_LENGTH_MM), unit: selectedUnit}) : text('overviewNote');
+  document.querySelector('#preview-note').textContent = length > OVERVIEW_MAX_LENGTH_MM ? text('cappedOverview', {length: displayMeasurement(OVERVIEW_MAX_LENGTH_MM), unit: state.unit}) : text('overviewNote');
 }
 
 function render() {
@@ -132,8 +135,8 @@ function toggleManual(select, field) { field.classList.toggle('is-hidden', selec
 function updateShape() {
   const isPng = controls.shape.value === 'png';
   controls.pngUpload.classList.toggle('is-hidden', !isPng);
-  controls.restoreOriginal.classList.toggle('is-hidden', !isPng || !png);
-  controls.originalSize.classList.toggle('is-hidden', !isPng || !png);
+  controls.restoreOriginal.classList.toggle('is-hidden', !isPng || !state.png);
+  controls.originalSize.classList.toggle('is-hidden', !isPng || !state.png);
   render();
 }
 
@@ -145,11 +148,12 @@ async function loadPng() {
   image.onload = async () => {
     const pixelsPerMeter = pngPixelsPerMeter(await file.arrayBuffer());
     const original = originalPngSizeMm({width: image.naturalWidth, height: image.naturalHeight, pixelsPerMeter});
-    if (png?.url) URL.revokeObjectURL(png.url);
-    png = {url, width: image.naturalWidth, height: image.naturalHeight, original};
+    if (state.png?.url) URL.revokeObjectURL(state.png.url);
+    state.png = {url, width: image.naturalWidth, height: image.naturalHeight, original};
+    png = state.png;
     controls.restoreOriginal.classList.remove('is-hidden');
     controls.originalSize.classList.remove('is-hidden');
-    controls.originalSize.textContent = text('originalSize', {width: displayMeasurement(original.width), height: displayMeasurement(original.height), unit: selectedUnit});
+    controls.originalSize.textContent = text('originalSize', {width: displayMeasurement(original.width), height: displayMeasurement(original.height), unit: state.unit});
     controls.stickerSize.value = 'manual';
     controls.manualSize.classList.remove('is-hidden');
     controls.sizeValue.value = displayMeasurement(Math.max(original.width, original.height));
@@ -161,10 +165,10 @@ async function loadPng() {
 controls.shape.addEventListener('change', updateShape);
 controls.pngFile.addEventListener('change', loadPng);
 controls.restoreOriginal.addEventListener('click', () => {
-  if (!png) return;
+  if (!state.png) return;
   controls.stickerSize.value = 'manual';
   controls.manualSize.classList.remove('is-hidden');
-  controls.sizeValue.value = displayMeasurement(Math.max(png.original.width, png.original.height));
+  controls.sizeValue.value = displayMeasurement(Math.max(state.png.original.width, state.png.original.height));
   render();
 });
 for (const [select, field] of [[controls.vinylWidth, controls.manualWidth], [controls.stickerSize, controls.manualSize], [controls.gap, controls.manualGap], [controls.length, controls.manualLength]]) {
