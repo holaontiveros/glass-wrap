@@ -13,7 +13,7 @@ h1 { margin-bottom: .7rem; font-size: clamp(2.7rem, 6vw, 5rem); line-height: .92
 .controls { padding: 1.5rem; }
 label { display: block; margin-top: 1rem; color: #fff4f8; font-size: .94rem; font-weight: 700; }
 label span { color: #ebc1d0; font-weight: 500; }
-select, input[type="number"], input[type="file"] { display: block; width: 100%; margin-top: .48rem; padding: .75rem .8rem; border: 1px solid #9e5d91; border-radius: .55rem; background: #351431; color: inherit; }
+select, input[type="number"], input[type="file"], .controls > input { display: block; width: 100%; margin-top: .48rem; padding: .75rem .8rem; border: 1px solid #9e5d91; border-radius: .55rem; background: #351431; color: inherit; }
 input[type="file"] { padding: .55rem; }
 label small { display: block; margin-top: .35rem; color: #efc8d7; font-size: .78rem; font-weight: 450; line-height: 1.4; }
 button { border: 0; border-radius: .6rem; background: #f1749e; color: #4c173f; font-weight: 800; cursor: pointer; }

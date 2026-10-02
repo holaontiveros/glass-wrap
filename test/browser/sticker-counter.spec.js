@@ -14,6 +14,7 @@ test('Sticker Counter preserves square stickers and a correct grid with a 300 mm
 
   await page.locator('#shape').selectOption('square');
   await page.locator('#vinyl-width').selectOption('manual');
+  await expect(page.locator('#width-value')).toHaveCSS('background-color', 'rgb(53, 20, 49)');
   await page.locator('#width-value').fill('300');
 
   await expect(page.locator('#total')).toHaveText('90');
