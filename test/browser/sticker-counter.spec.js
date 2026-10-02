@@ -39,6 +39,11 @@ test('Sticker Counter updates static Spanish copy, units, and the selected view 
 
   await page.locator('#language').selectOption('es');
   await expect(page.locator('h1')).toHaveText('Contador de stickers');
+  await expect(page.locator('label[for="vinyl-width"]')).toContainText('Ancho del vinil (mm)');
+  await expect(page.locator('label[for="shape"]')).toContainText('Tipo de sticker');
+  await expect(page.locator('#shape option[value="circle"]')).toHaveText('Círculo');
+  await expect(page.locator('#overview-button')).toHaveText('Vista general');
+  await expect(page.locator('#inspection-button')).toHaveText('Inspeccionar sticker');
   await expect(page.locator('#gap').locator('option[value="4"]')).toHaveText('4 mm');
 
   await page.locator('#unit').selectOption('cm');
